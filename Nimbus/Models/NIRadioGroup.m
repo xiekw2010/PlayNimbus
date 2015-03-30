@@ -229,6 +229,8 @@ static const NSInteger kInvalidSelection = NSIntegerMin;
                             ? UITableViewCellAccessoryCheckmark
                             : UITableViewCellAccessoryNone);
       cell.selectionStyle = self.tableViewCellSelectionStyle;
+    }else if (object == self) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
   }
 

@@ -475,6 +475,7 @@ typedef enum {
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+#import "DXSearchBarAndControllerModel.h"
 #import "NITableViewModel.h"
 #import "NIMutableTableViewModel.h"
 #import "NICellBackgrounds.h"
