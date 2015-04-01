@@ -17,6 +17,7 @@ typedef void (^DXSearchResultBlock)(NSArray *results, NSString *searchText, NSSt
 
 @protocol DXSearchBarDelegate <NSObject>
 
+@required
 /**
  *  The search logic by the viewcontroller
  *
@@ -29,6 +30,9 @@ typedef void (^DXSearchResultBlock)(NSArray *results, NSString *searchText, NSSt
                     scopeField:(NSString *)field
                      searchBar:(UISearchBar *)searchBar
                    resultBlock:(DXSearchResultBlock)block;
+
+@optional
+- (BOOL)shouldCongfigSearchDimmingView:(UIView *)dimmingView;
 
 @end
 

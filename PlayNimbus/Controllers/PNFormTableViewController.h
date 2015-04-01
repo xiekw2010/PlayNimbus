@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PNFormTableViewController : UITableViewController
+@interface PNFormTableViewController : UIViewController
 
 @end
