@@ -84,7 +84,6 @@
       if ([delegate respondsToSelector:invocation.selector]) {
         [invocation invokeWithTarget:delegate];
         didForward = YES;
-        break;
       }
     }
   }
