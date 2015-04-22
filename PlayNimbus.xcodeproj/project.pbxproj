@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6D0E1B751CD369972C5EFB1E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36718537A5E5F1A9E429A2F5 /* libPods.a */; };
+		BE3201991ADFA57000AD073F /* FLEX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3201981ADFA57000AD073F /* FLEX.framework */; };
+		BE32019C1ADFA78300AD073F /* UICategory.m in Sources */ = {isa = PBXBuildFile; fileRef = BE32019B1ADFA78300AD073F /* UICategory.m */; };
 		BE48C79F1AC1581500044490 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE48C79E1AC1581500044490 /* main.m */; };
 		BE48C7A21AC1581500044490 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE48C7A11AC1581500044490 /* AppDelegate.m */; };
 		BE48C7A81AC1581500044490 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE48C7A61AC1581500044490 /* Main.storyboard */; };
@@ -77,6 +79,12 @@
 		BE9D519C1AC258E4004AF000 /* PNAttributeLabelController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9D519B1AC258E4004AF000 /* PNAttributeLabelController.m */; };
 		BE9D51A21AC259BE004AF000 /* PNPlusRowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9D51A11AC259BE004AF000 /* PNPlusRowViewController.m */; };
 		BE9D51A51AC259E4004AF000 /* PNFormTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9D51A41AC259E4004AF000 /* PNFormTableViewController.m */; };
+		BEDBC3AC1AE4A6F20023CB84 /* PNExploreScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDBC3AB1AE4A6F20023CB84 /* PNExploreScrollViewController.m */; };
+		BEDBC3AF1AE4E12A0023CB84 /* PNPageBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDBC3AE1AE4E12A0023CB84 /* PNPageBannerViewController.m */; };
+		BEDBC3C01AE75EBE0023CB84 /* DXADBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDBC3BF1AE75EBE0023CB84 /* DXADBanner.m */; };
+		BEDBC3C31AE769C60023CB84 /* DXBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDBC3C11AE769C60023CB84 /* DXBanner.m */; };
+		BEDBC3C91AE7949E0023CB84 /* DXNavigationSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDBC3C81AE7949E0023CB84 /* DXNavigationSearchModel.m */; };
+		BEDBC3CC1AE797CF0023CB84 /* PNNavSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDBC3CB1AE797CF0023CB84 /* PNNavSearchViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +100,9 @@
 /* Begin PBXFileReference section */
 		36718537A5E5F1A9E429A2F5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C1DFF7214B2BCF5CCA4D9E9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		BE3201981ADFA57000AD073F /* FLEX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FLEX.framework; sourceTree = "<group>"; };
+		BE32019A1ADFA78300AD073F /* UICategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICategory.h; sourceTree = "<group>"; };
+		BE32019B1ADFA78300AD073F /* UICategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICategory.m; sourceTree = "<group>"; };
 		BE48C7991AC1581500044490 /* PlayNimbus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayNimbus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE48C79D1AC1581500044490 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE48C79E1AC1581500044490 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -248,6 +259,18 @@
 		BE9D51A11AC259BE004AF000 /* PNPlusRowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPlusRowViewController.m; sourceTree = "<group>"; };
 		BE9D51A31AC259E4004AF000 /* PNFormTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNFormTableViewController.h; sourceTree = "<group>"; };
 		BE9D51A41AC259E4004AF000 /* PNFormTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNFormTableViewController.m; sourceTree = "<group>"; };
+		BEDBC3AA1AE4A6F20023CB84 /* PNExploreScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNExploreScrollViewController.h; sourceTree = "<group>"; };
+		BEDBC3AB1AE4A6F20023CB84 /* PNExploreScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNExploreScrollViewController.m; sourceTree = "<group>"; };
+		BEDBC3AD1AE4E12A0023CB84 /* PNPageBannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNPageBannerViewController.h; sourceTree = "<group>"; };
+		BEDBC3AE1AE4E12A0023CB84 /* PNPageBannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPageBannerViewController.m; sourceTree = "<group>"; };
+		BEDBC3BE1AE75EBE0023CB84 /* DXADBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXADBanner.h; sourceTree = "<group>"; };
+		BEDBC3BF1AE75EBE0023CB84 /* DXADBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXADBanner.m; sourceTree = "<group>"; };
+		BEDBC3C11AE769C60023CB84 /* DXBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXBanner.m; sourceTree = "<group>"; };
+		BEDBC3C21AE769C60023CB84 /* DXBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXBanner.h; sourceTree = "<group>"; };
+		BEDBC3C71AE7949E0023CB84 /* DXNavigationSearchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXNavigationSearchModel.h; sourceTree = "<group>"; };
+		BEDBC3C81AE7949E0023CB84 /* DXNavigationSearchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXNavigationSearchModel.m; sourceTree = "<group>"; };
+		BEDBC3CA1AE797CF0023CB84 /* PNNavSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNNavSearchViewController.h; sourceTree = "<group>"; };
+		BEDBC3CB1AE797CF0023CB84 /* PNNavSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNNavSearchViewController.m; sourceTree = "<group>"; };
 		FB85ECB35175696AD33B9926 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -257,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D0E1B751CD369972C5EFB1E /* libPods.a in Frameworks */,
+				BE3201991ADFA57000AD073F /* FLEX.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +335,7 @@
 		BE48C79B1AC1581500044490 /* PlayNimbus */ = {
 			isa = PBXGroup;
 			children = (
+				BE3201981ADFA57000AD073F /* FLEX.framework */,
 				BE9D51861AC19D1E004AF000 /* Controllers */,
 				BE9D51871AC19D1E004AF000 /* models */,
 				BE9D51881AC19D1E004AF000 /* views */,
@@ -410,6 +435,8 @@
 		BE48C7E51AC15AB000044490 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				BE32019A1ADFA78300AD073F /* UICategory.h */,
+				BE32019B1ADFA78300AD073F /* UICategory.m */,
 				BE48C8C71AC15D4E00044490 /* NIActions.h */,
 				BE48C8C81AC15D4E00044490 /* NIActions.m */,
 				BE48C8C91AC15D4E00044490 /* NIActions+Subclassing.h */,
@@ -507,12 +534,16 @@
 		BE48C83F1AC15AB000044490 /* Paging Scroll View */ = {
 			isa = PBXGroup;
 			children = (
+				BEDBC3C11AE769C60023CB84 /* DXBanner.m */,
+				BEDBC3C21AE769C60023CB84 /* DXBanner.h */,
 				BE48C8401AC15AB000044490 /* NimbusPagingScrollView.h */,
 				BE48C8411AC15AB000044490 /* NIPagingScrollView+Subclassing.h */,
 				BE48C8421AC15AB000044490 /* NIPagingScrollView.h */,
 				BE48C8431AC15AB000044490 /* NIPagingScrollView.m */,
 				BE48C8441AC15AB000044490 /* NIPagingScrollViewPage.h */,
 				BE48C8451AC15AB000044490 /* NIPagingScrollViewPage.m */,
+				BEDBC3BE1AE75EBE0023CB84 /* DXADBanner.h */,
+				BEDBC3BF1AE75EBE0023CB84 /* DXADBanner.m */,
 			);
 			path = "Paging Scroll View";
 			sourceTree = "<group>";
@@ -556,6 +587,8 @@
 				BE8A35C11AC438A200C6F4A4 /* DXSearchBarAndControllerModel.m */,
 				BE8A35C41AC5194200C6F4A4 /* DXSearchCell.h */,
 				BE8A35C51AC5194200C6F4A4 /* DXSearchCell.m */,
+				BEDBC3C71AE7949E0023CB84 /* DXNavigationSearchModel.h */,
+				BEDBC3C81AE7949E0023CB84 /* DXNavigationSearchModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -611,6 +644,10 @@
 				BE8A35B41AC39CF300C6F4A4 /* PNRadioViewController.m */,
 				BE8A35BD1AC40B8B00C6F4A4 /* PNMutableTableViewController.h */,
 				BE8A35BE1AC40B8B00C6F4A4 /* PNMutableTableViewController.m */,
+				BEDBC3AA1AE4A6F20023CB84 /* PNExploreScrollViewController.h */,
+				BEDBC3AB1AE4A6F20023CB84 /* PNExploreScrollViewController.m */,
+				BEDBC3CA1AE797CF0023CB84 /* PNNavSearchViewController.h */,
+				BEDBC3CB1AE797CF0023CB84 /* PNNavSearchViewController.m */,
 			);
 			name = TableViewControllers;
 			sourceTree = "<group>";
@@ -638,6 +675,8 @@
 			children = (
 				BE9D51941AC258C3004AF000 /* PNPageViewController.h */,
 				BE9D51951AC258C3004AF000 /* PNPageViewController.m */,
+				BEDBC3AD1AE4E12A0023CB84 /* PNPageBannerViewController.h */,
+				BEDBC3AE1AE4E12A0023CB84 /* PNPageBannerViewController.m */,
 			);
 			name = PageScrollView;
 			sourceTree = "<group>";
@@ -793,12 +832,15 @@
 				BE48C9061AC15D4E00044490 /* NIOperations.m in Sources */,
 				BE48C7A21AC1581500044490 /* AppDelegate.m in Sources */,
 				BE48C8681AC15AB000044490 /* NILauncherViewController.m in Sources */,
+				BEDBC3CC1AE797CF0023CB84 /* PNNavSearchViewController.m in Sources */,
 				BE48C90C1AC15D4E00044490 /* NIViewRecycler.m in Sources */,
 				BE48C8FD1AC15D4E00044490 /* NIDeviceOrientation.m in Sources */,
+				BEDBC3AC1AE4A6F20023CB84 /* PNExploreScrollViewController.m in Sources */,
 				BE8A35BF1AC40B8B00C6F4A4 /* PNMutableTableViewController.m in Sources */,
 				BE48C9331AC15E7C00044490 /* NIMutableTableViewModel.m in Sources */,
 				BE9D518B1AC19D68004AF000 /* PNMainTableViewController.m in Sources */,
 				BE9D51991AC258D1004AF000 /* PNBadgeViewController.m in Sources */,
+				BEDBC3C91AE7949E0023CB84 /* DXNavigationSearchModel.m in Sources */,
 				BE48C84F1AC15AB000044490 /* NICollectionViewModel.m in Sources */,
 				BE48C8651AC15AB000044490 /* NILauncherButtonView.m in Sources */,
 				BE9D51A51AC259E4004AF000 /* PNFormTableViewController.m in Sources */,
@@ -813,6 +855,7 @@
 				BE9D51A21AC259BE004AF000 /* PNPlusRowViewController.m in Sources */,
 				BE48C9401AC15FC600044490 /* UIImage+AppleBlur.m in Sources */,
 				BE48C9311AC15E7C00044490 /* NICellFactory.m in Sources */,
+				BEDBC3C31AE769C60023CB84 /* DXBanner.m in Sources */,
 				BE48C8FC1AC15D4E00044490 /* NIDebuggingTools.m in Sources */,
 				BE48C8791AC15AB000044490 /* NIWebController.m in Sources */,
 				BE48C8FB1AC15D4E00044490 /* NIDataStructures.m in Sources */,
@@ -829,9 +872,11 @@
 				BE48C8FA1AC15D4E00044490 /* NICommonMetrics.m in Sources */,
 				BE48C8671AC15AB000044490 /* NILauncherView.m in Sources */,
 				BE8A35C21AC438A200C6F4A4 /* DXSearchBarAndControllerModel.m in Sources */,
+				BEDBC3AF1AE4E12A0023CB84 /* PNPageBannerViewController.m in Sources */,
 				BE48C9361AC15E7C00044490 /* NITableViewActions.m in Sources */,
 				BE48C8641AC15AB000044490 /* NIInterapp.m in Sources */,
 				BE48C8FE1AC15D4E00044490 /* NIError.m in Sources */,
+				BEDBC3C01AE75EBE0023CB84 /* DXADBanner.m in Sources */,
 				BE48C90D1AC15D4E00044490 /* UIResponder+NimbusCore.m in Sources */,
 				BE48C9341AC15E7C00044490 /* NIRadioGroup.m in Sources */,
 				BE48C9371AC15E7C00044490 /* NITableViewModel.m in Sources */,
@@ -840,6 +885,7 @@
 				BE48C84C1AC15AB000044490 /* NIBadgeView.m in Sources */,
 				BE48C79F1AC1581500044490 /* main.m in Sources */,
 				BE48C9051AC15D4E00044490 /* NINonRetainingCollections.m in Sources */,
+				BE32019C1ADFA78300AD073F /* UICategory.m in Sources */,
 				BE48C84D1AC15AB000044490 /* NICollectionViewActions.m in Sources */,
 				BE8A35B51AC39CF300C6F4A4 /* PNRadioViewController.m in Sources */,
 				BE48C9021AC15D4E00044490 /* NINavigationAppearance.m in Sources */,
@@ -976,6 +1022,13 @@
 			baseConfigurationReference = FB85ECB35175696AD33B9926 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PlayNimbus",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = PlayNimbus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -988,6 +1041,13 @@
 			baseConfigurationReference = 5C1DFF7214B2BCF5CCA4D9E9 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PlayNimbus",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = PlayNimbus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

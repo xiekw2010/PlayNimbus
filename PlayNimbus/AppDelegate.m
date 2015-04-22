@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "PNMainTableViewController.h"
+#import <FLEX/FLEXManager.h>
 
 @interface AppDelegate ()
 
@@ -23,7 +24,7 @@
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:catalogController];
     [self.window makeKeyAndVisible];
 
-    
+    [[FLEXManager sharedManager] showExplorer];
     return YES;
 }
 

@@ -17,16 +17,14 @@
 #import "NITableViewModel+Private.h"
 #import "PNPlusRowViewController.h"
 
-@interface PNMutableTableViewController ()<NIMutableTableViewModelDelegate, DXSearchBarDelegate>
+@interface PNMutableTableViewController ()<NIMutableTableViewModelDelegate, DXSearchModelDelegate>
 
 @end
 
 @implementation PNMutableTableViewController
 {
-    UIBarButtonItem *_move;
     UIBarButtonItem *_edit;
     UIBarButtonItem *_add;
-    UIBarButtonItem *_reload;
     NIMutableTableViewModel *_model;
     DXSearchBarAndControllerModel *_searchModel;
     NSArray *_searchScopes;
@@ -39,11 +37,9 @@
         _model = [[NIMutableTableViewModel alloc] initWithDelegate:self];
         [_model setSectionIndexType:NITableViewModelSectionIndexDynamic showsSearch:YES showsSummary:NO];
         
-        _reload = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(didTapReload)];
-        _move = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward target:self action:@selector(didTapMove)];
         _edit = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(didTapEdit)];
         _add = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(didTapAdd)];
-        self.navigationItem.rightBarButtonItems = @[_reload, _move, _edit, _add];
+        self.navigationItem.rightBarButtonItems = @[_edit, _add];
         _searchScopes = @[@"Apple", @"Google", @"Microsoft", @"Facebook"];
     }
     return self;
@@ -57,50 +53,51 @@
     self.tableView.tableHeaderView = _searchModel.searchBar;
 }
 
-- (void)filteredResultWithText:(NSString *)currentText scopeField:(NSString *)field
-                     searchBar:(UISearchBar *)searchBar resultBlock:(DXSearchResultBlock)block
+- (void)searchModel:(DXSearchBarAndControllerModel *)sModel configDimmingView:(UIView *)dimmingView
+{
+    for (UIView *vv in dimmingView.subviews) {
+        [vv removeFromSuperview];
+    }
+    dimmingView.alpha = 1.0;
+    dimmingView.backgroundColor = [UIColor clearColor];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:dimmingView.bounds];
+    CGRect bounds = self.view.bounds;
+    CGFloat yOffset = CGRectGetHeight(sModel.searchBar.frame) + 44.0;
+    bounds.origin.y += yOffset;
+    bounds.size.height -= yOffset;
+    UIImage *blurImage = [[self.view screenShotImageWithBounds:bounds] applyExtraLightEffect];
+    imageView.image = blurImage;
+    [dimmingView addSubview:imageView];
+}
+
+- (void)searchModel:(DXSearchBarAndControllerModel *)sModel filterResultWithText:(NSString *)currentText
+         scopeField:(NSString *)field
+        resultBlock:(DXSearchResultBlock)block
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         NSArray *result = nil;
         if ([currentText rangeOfString:@"aaa"].location != NSNotFound) {
-            NITableViewActions *actions = _searchModel.displayTableViewActions;
-            NITitleCellObject *titleObjc = [actions attachToObject:[NITitleCellObject objectWithTitle:@"aaa"] tapBlock:^BOOL(id object, id target, NSIndexPath *indexPath) {
-                PNPlusRowViewController *plus = [PNPlusRowViewController new];
-                [self.navigationController pushViewController:plus animated:YES];
-                return NO;
-            }];
+            NITitleCellObject *titleObjc = [NITitleCellObject objectWithTitle:@"aaa"];
             result = @[titleObjc, titleObjc, titleObjc, titleObjc, titleObjc];
         }
         if ([currentText rangeOfString:@"bbb"].location != NSNotFound) {
-            result = @[[NITitleCellObject objectWithTitle:@"go"], [NITitleCellObject objectWithTitle:@"go"], [NITitleCellObject objectWithTitle:@"go"], [NITitleCellObject objectWithTitle:@"go"], [NITitleCellObject objectWithTitle:@"go"]];
+            NITitleCellObject *titleObjc = [NITitleCellObject objectWithTitle:@"go"];
+            result = @[titleObjc, titleObjc, titleObjc];
         }
         if ([field isEqualToString:@"Apple"]) {
-            NITableViewActions *actions = _searchModel.displayTableViewActions;
-            NITitleCellObject *titleObjc = [actions attachToObject:[NITitleCellObject objectWithTitle:@"Apple"] tapBlock:^BOOL(id object, id target, NSIndexPath *indexPath) {
-                PNPlusRowViewController *plus = [PNPlusRowViewController new];
-                [self.navigationController pushViewController:plus animated:YES];
-                return NO;
-            }];
+            NITitleCellObject *titleObjc = [NITitleCellObject objectWithTitle:@"Apple"];
             result = @[titleObjc, titleObjc, titleObjc, titleObjc, titleObjc];
         }
         if ([field isEqualToString:@"Google"]) {
-            NITableViewActions *actions = _searchModel.displayTableViewActions;
-            NITitleCellObject *titleObjc = [actions attachToObject:[NITitleCellObject objectWithTitle:@"Google"] tapBlock:^BOOL(id object, id target, NSIndexPath *indexPath) {
-                PNPlusRowViewController *plus = [PNPlusRowViewController new];
-                [self.navigationController pushViewController:plus animated:YES];
-                return NO;
-            }];
-            result = @[titleObjc, titleObjc, titleObjc, titleObjc, titleObjc];
+            NITitleCellObject *titleObjc = [NITitleCellObject objectWithTitle:@"Google"];
+            result = @[titleObjc, titleObjc];
         }
         if ([field isEqualToString:@"Facebook"]) {
-            NITableViewActions *actions = _searchModel.displayTableViewActions;
-            NITitleCellObject *titleObjc = [actions attachToObject:[NITitleCellObject objectWithTitle:@"Facebook"] tapBlock:^BOOL(id object, id target, NSIndexPath *indexPath) {
-                PNPlusRowViewController *plus = [PNPlusRowViewController new];
-                [self.navigationController pushViewController:plus animated:YES];
-                return NO;
-            }];
-            result = @[titleObjc, titleObjc, titleObjc, titleObjc, titleObjc];
+            NITitleCellObject *titleObjc = [NITitleCellObject objectWithTitle:@"Facebook"];
+            result = @[titleObjc, titleObjc, titleObjc];
         }
+        [_searchModel.displayTableViewActions attachToClass:[NITitleCellObject class] navigationBlock:NIPushControllerAction([self class])];
+        
         block(result, currentText, field);
     });
 }
@@ -114,15 +111,6 @@
     return ms;
 }
 
-- (void)didTapReload
-{
-    [self.tableView reloadData];
-}
-
-- (void)didTapMove
-{
-}
-
 - (void)didTapEdit
 {
     BOOL editing = self.tableView.editing == YES;
@@ -131,7 +119,7 @@
     }else {
         _edit = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(didTapEdit)];
     }
-    self.navigationItem.rightBarButtonItems = @[_reload, _move, _edit, _add];
+    self.navigationItem.rightBarButtonItems = @[_edit, _add];
     [self.tableView setEditing:!editing animated:YES];
 }
 
@@ -156,7 +144,20 @@
                    cellForTableView:(UITableView *)tableView
                         atIndexPath:(NSIndexPath *)indexPath
                          withObject:(id)object {
-    return [NICellFactory tableViewModel:tableViewModel cellForTableView:tableView atIndexPath:indexPath withObject:object];
+    UITableViewCell *cell = [NICellFactory tableViewModel:tableViewModel cellForTableView:tableView atIndexPath:indexPath withObject:object];
+    switch (indexPath.row % 3) {
+        case 0:
+            cell.backgroundColor = [UIColor orangeColor];
+            break;
+        case 1:
+            cell.backgroundColor = [UIColor redColor];
+            break;
+        case 2:
+            cell.backgroundColor = [UIColor yellowColor];
+        default:
+            break;
+    }
+    return cell;
 }
 
 - (BOOL)tableViewModel:(NIMutableTableViewModel *)tableViewModel canEditObject:(id)object atIndexPath:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView

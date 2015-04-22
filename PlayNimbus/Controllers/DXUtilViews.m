@@ -90,7 +90,7 @@
         DXAlbumCellObject *obj = object;
         self.textLabel.text = obj.title;
         self.detailTextLabel.text = @"hello";
-        [self.imageView setImageWithURL:[NSURL URLWithString:obj.imageURL] placeholderImage:nil];
+        [self.imageView sd_setImageWithURL:[NSURL URLWithString:obj.imageURL] placeholderImage:nil];
         return YES;
     }
     return NO;

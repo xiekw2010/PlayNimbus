@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class NITableViewActions;
+
 @interface PNPlusRowViewController : UITableViewController
+
+@property (nonatomic, strong) NITableViewActions *plusActions;
 
 @end

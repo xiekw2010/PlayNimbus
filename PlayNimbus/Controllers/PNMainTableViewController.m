@@ -16,12 +16,15 @@
 
 // Page Scroll View
 #import "PNPageViewController.h"
+#import "PNPageBannerViewController.h"
 
 // TableView models
 #import "PNFormTableViewController.h"
 #import "PNPlusRowViewController.h"
 #import "PNRadioViewController.h"
 #import "PNMutableTableViewController.h"
+#import "PNExploreScrollViewController.h"
+#import "PNNavSearchViewController.h"
 
 // CSS Layout
 #import "PNCssLayoutViewController.h"
@@ -53,13 +56,16 @@
                                    [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"Css layout" subtitle:@"use css do the layout"] navigationBlock:NIPushControllerAction([PNCssLayoutViewController class])],
                                    @"PageScrollView",
                                    [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"Page scrollView" subtitle:@"Use page scrollView to do the layout"] navigationBlock:NIPushControllerAction([PNPageViewController class])],
+                                   [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"Banner view" subtitle:@"banner now"] navigationBlock:NIPushControllerAction([PNPageBannerViewController class])],
                                    @"Badge View",
                                    [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"Badge View" subtitle:@"use the badgeView"] navigationBlock:NIPushControllerAction([PNBadgeViewController class])],
                                    @"TableView events",
+                                   [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"Scroll View"] navigationBlock:NIPushControllerAction([PNExploreScrollViewController class])],
                                    [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"tableViewPlus row"] navigationBlock:NIPushControllerAction([PNPlusRowViewController class])],
-                                   [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"tableView form data"] navigationBlock:NIPushControllerAction([PNFormTableViewController class])],
+                                   [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"Search bar"] navigationBlock:NIPushControllerAction([PNFormTableViewController class])],
                                    [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"Radio table"] navigationBlock:NIPushControllerAction([PNRadioViewController class])],
-                                   [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"Mutable table"] navigationBlock:NIPushControllerAction([PNMutableTableViewController class])]
+                                   [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"Mutable table"] navigationBlock:NIPushControllerAction([PNMutableTableViewController class])],
+                                   [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"nav search"] navigationBlock:NIPushControllerAction([PNNavSearchViewController class])]
 
                                    ];
         
@@ -79,6 +85,25 @@
     
     self.tableView.dataSource = _model;
     self.tableView.delegate = _actions;
+    
+    
+    NSString *path = @"http://online.store.com/storefront/";
+    NSDictionary *params = @{@"request" : @"get-document", @"doi" : @"10.1175%2F1520-0426(2005)014%3C1157:DODADSS%3E2.0.CO%3B2"};
+    NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@?", path];
+    if ([[params allKeys] count] > 0){
+        NSMutableArray *array = [NSMutableArray array];
+        for (NSString *key in [params allKeys]){
+            NSString *value = [params[key] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            [array addObject:[NSString stringWithFormat:@"%@=%@", key, value]];
+        }
+        
+        [urlString appendFormat:@"%@", [array componentsJoinedByString:@"&"]];
+    }
+    NSLog(@"normal string is %@", urlString);
+    NSString *nim = NIStringByAddingQueryDictionaryToString(path, params);
+    NSLog(@"nim string is %@", nim);
+
 }
+
 
 @end

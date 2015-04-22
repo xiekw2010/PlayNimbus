@@ -12,19 +12,27 @@
 #import "NICellFactory.h"
 #import "NIMutableTableViewModel+Private.h"
 #import "DXSearchCell.h"
+#import <objc/runtime.h>
 
 // Do the default delegate and forward the delegate
 
-@implementation DXSearchBarAndControllerModel
+@interface DXSearchBarAndControllerModel ()
 
+
+
+@end
+
+@implementation DXSearchBarAndControllerModel
 
 - (instancetype)initWithContentsViewController:(UIViewController *)contentsViewController searchScopes:(NSArray *)scopes predicateDelegate:(id)delegate
 {
     if (self = [super init]) {
+        _contentsViewController = contentsViewController;
         _searchPredicateDelegate = delegate;
         _displayTableViewModel = [[NIMutableTableViewModel alloc] initWithDelegate:(id)[NICellFactory class]];
         _displayTableViewActions = [[NITableViewActions alloc] initWithTarget:contentsViewController];
-        UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(contentsViewController.view.bounds), 44.0)];
+        CGRect screenBounds = [[UIScreen mainScreen] bounds];
+        UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(screenBounds), 44.0)];
     
         UISearchDisplayController *displayViewController = [[UISearchDisplayController alloc] initWithSearchBar:searchBar contentsController:contentsViewController];
         displayViewController.searchBar.scopeButtonTitles = scopes;
@@ -35,36 +43,52 @@
         displayViewController.searchResultsDelegate = [_displayTableViewActions forwardingTo:(id)contentsViewController];
         _searchBar = searchBar;
         _displayController = displayViewController;
-        
     }
     return self;
 }
 
-
-
-//hack way to search the dimming view
-- (UIView *)listSubviewsOfView:(UIView *)view
+- (BOOL)shouldForwardSelector:(SEL)aSelector
 {
-    if ([view isKindOfClass:NSClassFromString(@"_UISearchDisplayControllerDimmingView")]) {
-        return view;
+    struct objc_method_description descprition;
+    descprition = protocol_getMethodDescription(@protocol(UISearchDisplayDelegate), aSelector, NO, YES);
+    return (descprition.name != nil && descprition.types != NULL);
+}
+
+- (BOOL)respondsToSelector:(SEL)aSelector
+{
+    if ([super respondsToSelector:aSelector]) {
+        return YES;
+    }else if ([self shouldForwardSelector:aSelector]) {
+        return [self.searchPredicateDelegate respondsToSelector:aSelector];
     }
-    
-    // Get the subviews of the view
-    NSArray *subviews = [view subviews];
-    
-    // Return if there are no subviews
-    if ([subviews count] == 0) return nil; // COUNT CHECK LINE
-    
-    for (UIView *subview in subviews) {
-        
-        // Do what you want to do with the subview
-        NSLog(@"%@", subview);
-        
-        // List the subviews of subview
-        [self listSubviewsOfView:subview];
+    return NO;
+}
+
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)selector
+{
+    NSMethodSignature *signature = [super methodSignatureForSelector:selector];
+    if (signature == nil) {
+        if ([self.searchPredicateDelegate respondsToSelector:selector]) {
+            id obj = self.searchPredicateDelegate;
+            signature = [obj methodSignatureForSelector:selector];
+        }
     }
+    return signature;
+}
+
+- (void)forwardInvocation:(NSInvocation *)invocation
+{
+    BOOL didForward = NO;
     
-    return nil;
+    if ([self shouldForwardSelector:invocation.selector]) {
+        if ([self.searchPredicateDelegate respondsToSelector:invocation.selector]) {
+            [invocation invokeWithTarget:self.searchPredicateDelegate];
+            didForward = YES;
+        }
+    }
+    if (!didForward) {
+        [super forwardInvocation:invocation];
+    }
 }
 
 - (NSString *)currentSearchBarScope
@@ -92,42 +116,28 @@
 {
     [self startAnimating];
     __weak typeof(self) wself = self;
-    [self.searchPredicateDelegate filteredResultWithText:searchBar.text scopeField:[self currentSearchBarScope] searchBar:searchBar resultBlock:^(NSArray *results, NSString *searchText, NSString *searchScope) {
+    [self.searchPredicateDelegate searchModel:self filterResultWithText:searchBar.text scopeField:[self currentSearchBarScope] resultBlock:^(NSArray *results, NSString *searchText, NSString *searchScope) {
         [self stopAnimating];
-        if ([searchText isEqualToString:searchBar.text] && ([searchScope isEqualToString:[self currentSearchBarScope]] || !searchScope)) {
+        if (([searchText isEqualToString:searchBar.text] && searchText.length > 0) && ([searchScope isEqualToString:[self currentSearchBarScope]] || !searchScope)) {
             [wself.displayTableViewModel addObjectsFromArray:results];
             [wself.displayController.searchResultsTableView reloadData];
         }
     }];
 }
 
-//- (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller
-//{
-//    if ([_searchPredicateDelegate respondsToSelector:@selector(shouldCongfigSearchDimmingView:)]) {
-//        UIView *view = [self listSubviewsOfView:_displayController.searchResultsTableView.superview];
-//        [_searchPredicateDelegate shouldCongfigSearchDimmingView:view];
-//    }
-//}
-
 - (void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
 {
-    if ([_searchPredicateDelegate respondsToSelector:@selector(shouldCongfigSearchDimmingView:)]) {
-        UIView *view = [self listSubviewsOfView:_displayController.searchResultsTableView.superview];
-        [_searchPredicateDelegate shouldCongfigSearchDimmingView:view];
-    }
-}
-
-- (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller
-{
-    if ([_searchPredicateDelegate respondsToSelector:@selector(shouldCongfigSearchDimmingView:)]) {
-        UIView *view = [self listSubviewsOfView:_displayController.searchResultsTableView.superview];
-        [_searchPredicateDelegate shouldCongfigSearchDimmingView:view];
+    if ([self.searchPredicateDelegate respondsToSelector:@selector(searchModel:configDimmingView:)]) {
+        UIView *dimmingView = [[_contentsViewController.view findRecursiveSubviewsIncludeSelf:NO specificPredicate:^BOOL(UIView *aView) {
+            return [aView isKindOfClass:[NSClassFromString(@"_UISearchDisplayControllerDimmingView") class]];
+        }] firstObject];
+        [self.searchPredicateDelegate searchModel:self configDimmingView:dimmingView];
     }
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
 {
-    if ([self.searchPredicateDelegate respondsToSelector:@selector(filteredResultWithText:scopeField:searchBar:resultBlock:)]) {
+    if ([self.searchPredicateDelegate respondsToSelector:@selector(searchModel:filterResultWithText:scopeField:resultBlock:)]) {
         [self refreshTheResultTableViewWithSearchBar:controller.searchBar];
     }
     return YES;
@@ -135,7 +145,7 @@
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
-    if ([self.searchPredicateDelegate respondsToSelector:@selector(filteredResultWithText:scopeField:searchBar:resultBlock:)]) {
+    if ([self.searchPredicateDelegate respondsToSelector:@selector(searchModel:filterResultWithText:scopeField:resultBlock:)]) {
         [self refreshTheResultTableViewWithSearchBar:controller.searchBar];
     }
     return YES;

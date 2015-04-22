@@ -9,7 +9,7 @@
 #import "PNFormTableViewController.h"
 #import "NimbusModels.h"
 
-@interface PNFormTableViewController ()<DXSearchBarDelegate>
+@interface PNFormTableViewController ()<DXSearchModelDelegate>
 
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -34,12 +34,19 @@
     return self;
 }
 
-- (void)filteredResultWithText:(NSString *)currentText scopeField:(NSString *)field searchBar:(UISearchBar *)searchBar resultBlock:(DXSearchResultBlock)block
+- (void)searchModel:(DXSearchBarAndControllerModel *)sModel filterResultWithText:(NSString *)currentText scopeField:(NSString *)field searchBar:(UISearchBar *)searchBar resultBlock:(DXSearchResultBlock)block
 {
-    NSArray *array = @[[NITitleCellObject objectWithTitle:@"ok"],
-                       [NITitleCellObject objectWithTitle:@"good"],
-                       [NITitleCellObject objectWithTitle:@"please"]];
-    block(array, currentText, field);
+    
+}
+
+- (void)searchModel:(DXSearchBarAndControllerModel *)sModel filterResultWithText:(NSString *)currentText scopeField:(NSString *)field resultBlock:(DXSearchResultBlock)block
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSArray *array = @[[NITitleCellObject objectWithTitle:@"a"],
+                           [NITitleCellObject objectWithTitle:@"b"],
+                           [NITitleCellObject objectWithTitle:@"c"]];
+        block(array, currentText, field);
+    });
 }
 
 - (BOOL)shouldCongfigSearchDimmingView:(UIView *)dimmingView

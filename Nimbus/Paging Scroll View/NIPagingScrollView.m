@@ -293,9 +293,10 @@ const CGFloat NIPagingScrollViewDefaultPageMargin = 10;
 
   // This will only be called once, before the page is shown.
   [self willDisplayPage:page atIndex:pageIndex];
-
+    
   [_scrollView addSubview:page];
   [_visiblePages addObject:page];
+    
 }
 
 - (void)recyclePageAtIndex:(NSInteger)pageIndex {

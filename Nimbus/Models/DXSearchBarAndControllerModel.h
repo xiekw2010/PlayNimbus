@@ -15,7 +15,7 @@
 
 typedef void (^DXSearchResultBlock)(NSArray *results, NSString *searchText, NSString *searchScope);
 
-@protocol DXSearchBarDelegate <NSObject>
+@protocol DXSearchModelDelegate <NSObject>
 
 @required
 /**
@@ -26,25 +26,26 @@ typedef void (^DXSearchResultBlock)(NSArray *results, NSString *searchText, NSSt
  *  @param searchBar   the search obj
  *  @param block       reuslts must imp the - (id)cellClass method, and use displayTableViewActions to attach the actions from the result.
  */
-- (void)filteredResultWithText:(NSString *)currentText
-                    scopeField:(NSString *)field
-                     searchBar:(UISearchBar *)searchBar
-                   resultBlock:(DXSearchResultBlock)block;
+- (void)searchModel:(DXSearchBarAndControllerModel *)sModel filterResultWithText:(NSString *)currentText
+         scopeField:(NSString *)field
+        resultBlock:(DXSearchResultBlock)block;
 
 @optional
-- (BOOL)shouldCongfigSearchDimmingView:(UIView *)dimmingView;
+- (void)searchModel:(DXSearchBarAndControllerModel *)sModel configDimmingView:(UIView *)dimmingView;
 
 @end
 
-@interface DXSearchBarAndControllerModel : NSObject<UISearchBarDelegate, UISearchDisplayDelegate>
+@interface DXSearchBarAndControllerModel : NSObject<UISearchDisplayDelegate>
 
-- (instancetype)initWithContentsViewController:(UIViewController *)contentsViewController searchScopes:(NSArray *)scopes predicateDelegate:(id<DXSearchBarDelegate>)delegate;
+- (instancetype)initWithContentsViewController:(UIViewController *)contentsViewController searchScopes:(NSArray *)scopes predicateDelegate:(id<DXSearchModelDelegate>)delegate;
+- (void)refreshTheResultTableViewWithSearchBar:(UISearchBar *)searchBar;
 
-@property (nonatomic, weak) id<DXSearchBarDelegate> searchPredicateDelegate;
+@property (nonatomic, weak) id<DXSearchModelDelegate> searchPredicateDelegate;
 @property (nonatomic, strong, readonly) UISearchBar *searchBar;
+@property (nonatomic, strong, readonly) NITableViewActions *displayTableViewActions;
 @property (nonatomic, strong, readonly) UISearchDisplayController *displayController;
 @property (nonatomic, weak, readonly) UIViewController *contentsViewController;
 @property (nonatomic, strong, readonly) NIMutableTableViewModel *displayTableViewModel;
-@property (nonatomic, strong, readonly) NITableViewActions *displayTableViewActions;
+
 
 @end

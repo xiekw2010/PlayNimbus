@@ -7,8 +7,12 @@
 //
 
 #import "PNPlusRowViewController.h"
+#import "NimbusCore.h"
 
 @implementation PNPlusRowViewController
+{
+    NITableViewModel *_model;
+}
 
 
 @end
