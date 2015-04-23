@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6D0E1B751CD369972C5EFB1E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36718537A5E5F1A9E429A2F5 /* libPods.a */; };
+		BE1360871AE8F37D0099BA7A /* DXSearchHotTagsHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1360861AE8F37D0099BA7A /* DXSearchHotTagsHeader.m */; };
 		BE3201991ADFA57000AD073F /* FLEX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3201981ADFA57000AD073F /* FLEX.framework */; };
 		BE32019C1ADFA78300AD073F /* UICategory.m in Sources */ = {isa = PBXBuildFile; fileRef = BE32019B1ADFA78300AD073F /* UICategory.m */; };
 		BE48C79F1AC1581500044490 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE48C79E1AC1581500044490 /* main.m */; };
@@ -85,6 +86,7 @@
 		BEDBC3C31AE769C60023CB84 /* DXBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDBC3C11AE769C60023CB84 /* DXBanner.m */; };
 		BEDBC3C91AE7949E0023CB84 /* DXNavigationSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDBC3C81AE7949E0023CB84 /* DXNavigationSearchModel.m */; };
 		BEDBC3CC1AE797CF0023CB84 /* PNNavSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDBC3CB1AE797CF0023CB84 /* PNNavSearchViewController.m */; };
+		BEDBC3FA1AE8E9470023CB84 /* DXSearchHistoryCellObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDBC3F91AE8E9470023CB84 /* DXSearchHistoryCellObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +102,8 @@
 /* Begin PBXFileReference section */
 		36718537A5E5F1A9E429A2F5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C1DFF7214B2BCF5CCA4D9E9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		BE1360851AE8F37D0099BA7A /* DXSearchHotTagsHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXSearchHotTagsHeader.h; sourceTree = "<group>"; };
+		BE1360861AE8F37D0099BA7A /* DXSearchHotTagsHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXSearchHotTagsHeader.m; sourceTree = "<group>"; };
 		BE3201981ADFA57000AD073F /* FLEX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FLEX.framework; sourceTree = "<group>"; };
 		BE32019A1ADFA78300AD073F /* UICategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICategory.h; sourceTree = "<group>"; };
 		BE32019B1ADFA78300AD073F /* UICategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICategory.m; sourceTree = "<group>"; };
@@ -271,6 +275,8 @@
 		BEDBC3C81AE7949E0023CB84 /* DXNavigationSearchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXNavigationSearchModel.m; sourceTree = "<group>"; };
 		BEDBC3CA1AE797CF0023CB84 /* PNNavSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNNavSearchViewController.h; sourceTree = "<group>"; };
 		BEDBC3CB1AE797CF0023CB84 /* PNNavSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNNavSearchViewController.m; sourceTree = "<group>"; };
+		BEDBC3F81AE8E9470023CB84 /* DXSearchHistoryCellObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXSearchHistoryCellObject.h; sourceTree = "<group>"; };
+		BEDBC3F91AE8E9470023CB84 /* DXSearchHistoryCellObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXSearchHistoryCellObject.m; sourceTree = "<group>"; };
 		FB85ECB35175696AD33B9926 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -309,6 +315,28 @@
 				36718537A5E5F1A9E429A2F5 /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BE3A31EB1AE9444600C06D5E /* SearchModel */ = {
+			isa = PBXGroup;
+			children = (
+				BE8A35C01AC438A200C6F4A4 /* DXSearchBarAndControllerModel.h */,
+				BE8A35C11AC438A200C6F4A4 /* DXSearchBarAndControllerModel.m */,
+				BEDBC3C71AE7949E0023CB84 /* DXNavigationSearchModel.h */,
+				BEDBC3C81AE7949E0023CB84 /* DXNavigationSearchModel.m */,
+				BE3A31EC1AE9446B00C06D5E /* UtilViews */,
+				BEDBC3F71AE8E9000023CB84 /* SearchHistoryObjects */,
+			);
+			name = SearchModel;
+			sourceTree = "<group>";
+		};
+		BE3A31EC1AE9446B00C06D5E /* UtilViews */ = {
+			isa = PBXGroup;
+			children = (
+				BE8A35C41AC5194200C6F4A4 /* DXSearchCell.h */,
+				BE8A35C51AC5194200C6F4A4 /* DXSearchCell.m */,
+			);
+			name = UtilViews;
 			sourceTree = "<group>";
 		};
 		BE48C7901AC1581500044490 = {
@@ -561,6 +589,7 @@
 		BE48C9181AC15E7C00044490 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BE3A31EB1AE9444600C06D5E /* SearchModel */,
 				BE48C9191AC15E7C00044490 /* NICellBackgrounds.h */,
 				BE48C91A1AC15E7C00044490 /* NICellBackgrounds.m */,
 				BE48C91B1AC15E7C00044490 /* NICellCatalog.h */,
@@ -583,12 +612,6 @@
 				BE48C92C1AC15E7C00044490 /* NITableViewModel+Private.h */,
 				BE48C92D1AC15E7C00044490 /* NITableViewModel.h */,
 				BE48C92E1AC15E7C00044490 /* NITableViewModel.m */,
-				BE8A35C01AC438A200C6F4A4 /* DXSearchBarAndControllerModel.h */,
-				BE8A35C11AC438A200C6F4A4 /* DXSearchBarAndControllerModel.m */,
-				BE8A35C41AC5194200C6F4A4 /* DXSearchCell.h */,
-				BE8A35C51AC5194200C6F4A4 /* DXSearchCell.m */,
-				BEDBC3C71AE7949E0023CB84 /* DXNavigationSearchModel.h */,
-				BEDBC3C81AE7949E0023CB84 /* DXNavigationSearchModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -688,6 +711,17 @@
 				BE9D51921AC258B1004AF000 /* PNCssLayoutViewController.m */,
 			);
 			name = "Css layout";
+			sourceTree = "<group>";
+		};
+		BEDBC3F71AE8E9000023CB84 /* SearchHistoryObjects */ = {
+			isa = PBXGroup;
+			children = (
+				BEDBC3F81AE8E9470023CB84 /* DXSearchHistoryCellObject.h */,
+				BEDBC3F91AE8E9470023CB84 /* DXSearchHistoryCellObject.m */,
+				BE1360851AE8F37D0099BA7A /* DXSearchHotTagsHeader.h */,
+				BE1360861AE8F37D0099BA7A /* DXSearchHotTagsHeader.m */,
+			);
+			name = SearchHistoryObjects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -855,7 +889,9 @@
 				BE9D51A21AC259BE004AF000 /* PNPlusRowViewController.m in Sources */,
 				BE48C9401AC15FC600044490 /* UIImage+AppleBlur.m in Sources */,
 				BE48C9311AC15E7C00044490 /* NICellFactory.m in Sources */,
+				BE1360871AE8F37D0099BA7A /* DXSearchHotTagsHeader.m in Sources */,
 				BEDBC3C31AE769C60023CB84 /* DXBanner.m in Sources */,
+				BEDBC3FA1AE8E9470023CB84 /* DXSearchHistoryCellObject.m in Sources */,
 				BE48C8FC1AC15D4E00044490 /* NIDebuggingTools.m in Sources */,
 				BE48C8791AC15AB000044490 /* NIWebController.m in Sources */,
 				BE48C8FB1AC15D4E00044490 /* NIDataStructures.m in Sources */,

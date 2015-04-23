@@ -10,7 +10,7 @@
 #import "DXNavigationSearchModel.h"
 #import "NimbusCore.h"
 
-@interface PNNavSearchViewController ()<DXSearchModelDelegate>
+@interface PNNavSearchViewController ()<DXSearchModelDelegate, DXSearchModelHistoryDataSource>
 {
     DXNavigationSearchModel *_navSearchModel;
 }

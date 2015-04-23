@@ -13,20 +13,27 @@
 #import "NIMutableTableViewModel+Private.h"
 #import "DXSearchCell.h"
 #import <objc/runtime.h>
+#import "DXSearchHistoryCellObject.h"
 
 // Do the default delegate and forward the delegate
 
 @interface DXSearchBarAndControllerModel ()
 
-
+@property (nonatomic, strong) UITableView *historyTableView;
+@property (nonatomic, strong) NITableViewModel *model;
+@property (nonatomic, strong) NITableViewActions *actions;
 
 @end
 
 @implementation DXSearchBarAndControllerModel
+{
+    BOOL _usingTheCustomDimmingView;
+}
 
 - (instancetype)initWithContentsViewController:(UIViewController *)contentsViewController searchScopes:(NSArray *)scopes predicateDelegate:(id)delegate
 {
     if (self = [super init]) {
+        self.usingHistory = YES;
         _contentsViewController = contentsViewController;
         _searchPredicateDelegate = delegate;
         _displayTableViewModel = [[NIMutableTableViewModel alloc] initWithDelegate:(id)[NICellFactory class]];
@@ -38,6 +45,7 @@
         displayViewController.searchBar.scopeButtonTitles = scopes;
         displayViewController.searchBar.selectedScopeButtonIndex = 0;
         displayViewController.searchBar.showsScopeBar = scopes.count > 0;
+        displayViewController.searchBar.delegate = self;
         displayViewController.delegate = self;
         displayViewController.searchResultsDataSource = _displayTableViewModel;
         displayViewController.searchResultsDelegate = [_displayTableViewActions forwardingTo:(id)contentsViewController];
@@ -125,13 +133,25 @@
     }];
 }
 
+#pragma -mark UISearchDisplayDelegate
+
 - (void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
 {
-    if ([self.searchPredicateDelegate respondsToSelector:@selector(searchModel:configDimmingView:)]) {
+    if (self.isUsingHistory) {
         UIView *dimmingView = [[_contentsViewController.view findRecursiveSubviewsIncludeSelf:NO specificPredicate:^BOOL(UIView *aView) {
             return [aView isKindOfClass:[NSClassFromString(@"_UISearchDisplayControllerDimmingView") class]];
         }] firstObject];
-        [self.searchPredicateDelegate searchModel:self configDimmingView:dimmingView];
+        
+        if ([self.searchPredicateDelegate respondsToSelector:@selector(searchModel:configDimmingView:)]) {
+            _usingTheCustomDimmingView = YES;
+            [self.searchPredicateDelegate searchModel:self configDimmingView:dimmingView];
+        }
+        
+        if (_usingTheCustomDimmingView == NO) {
+            dimmingView.alpha = 1.0;
+            self.historyTableView.frame = dimmingView.bounds;
+            [dimmingView addSubview:self.historyTableView];
+        }
     }
 }
 
@@ -150,5 +170,91 @@
     }
     return YES;
 }
+
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller didHideSearchResultsTableView:(UITableView *)tableView
+{
+    [self setupTableView];
+}
+
+#pragma -mark UISearchBarDelegate
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    if (self.isUsingHistory) {
+        if (searchBar.text.length > 0) {
+            [self refreshTheResultTableViewWithSearchBar:self.searchBar];
+            DXSearchHistoryCellObject *obj = [DXSearchHistoryCellObject new];
+            obj.name = searchBar.text;
+            [DXSearchHistoryCellObject enqueueObject:obj];
+        }
+    }
+}
+
+- (UITableView *)historyTableView
+{
+    if (!_historyTableView) {
+        _historyTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _historyTableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        _historyTableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+        _actions = [[NITableViewActions alloc] initWithTarget:self];
+        _historyTableView.delegate = self.actions;
+    }
+    [self setupTableView];
+    return _historyTableView;
+}
+
+- (void)setupTableView
+{
+    if (self.isUsingHistory == NO || _usingTheCustomDimmingView == YES) {
+        return;
+    }
+    NSMutableArray *sectionArray = [@[@"hello", [NITitleCellObject objectWithTitle:@"hi"], [NITitleCellObject objectWithTitle:@"go"]] mutableCopy];
+    NSArray *historyObjects = [DXSearchHistoryCellObject historyObjects];
+    for (DXSearchHistoryCellObject *hobj in historyObjects) {
+        [_actions attachToObject:hobj detailBlock:^BOOL(id object, id target, NSIndexPath *indexPath) {
+            NSLog(@"current is %@", target);
+            return NO;
+        }];
+    }
+    
+    if (historyObjects.count) {
+        [sectionArray addObject:NSLocalizedString(@"历史搜索", nil)];
+        [sectionArray addObjectsFromArray:historyObjects];
+        [sectionArray addObject:[_actions attachToObject:[NITitleCellObject objectWithTitle:NSLocalizedString(@"删除所有历史记录", nil)] tapBlock:^BOOL(id object, id target, NSIndexPath *indexPath) {
+            [DXSearchHistoryCellObject removeAll];
+            [self setupTableView];
+            return YES;
+        }]];
+    }
+    
+    
+    _model = [[NITableViewModel alloc] initWithSectionedArray:sectionArray delegate:(id)[NICellFactory class]];
+    
+    __weak typeof(self) wself = self;
+    _model.createCellBlock = ^UITableViewCell * (UITableView* tableView, NSIndexPath* indexPath, id object){
+        if ([object isKindOfClass:[DXSearchHistoryCellObject class]]) {
+            Class cellClass = [object cellClass];
+            NSString *identifier = NSStringFromClass(cellClass);
+            DXSearchHistoryCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            if (!cell) {
+                cell = [[cellClass alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+            }
+            cell.textLabel.text = [object name];
+            cell.tapBlock = ^{
+                [DXSearchHistoryCellObject dequeueObject:object];
+                [wself setupTableView];
+            };
+            return cell;
+        }else {
+            return nil;
+        }
+    };
+    
+    
+    _historyTableView.dataSource = self.model;
+    [_historyTableView reloadData];
+}
+
 
 @end

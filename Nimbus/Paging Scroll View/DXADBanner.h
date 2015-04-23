@@ -10,8 +10,9 @@
 #import "NIPagingScrollViewPage.h"
 
 @class DXADBanner;
+@protocol DXADBannerItem;
 
-typedef void (^DXBannerAction)(NSUInteger index, DXADBanner *banner);
+typedef void (^DXBannerAction)(DXADBanner *banner, NSUInteger index, id<DXADBannerItem> item);
 
 
 @protocol DXADBannerItem <NSObject>
@@ -28,16 +29,10 @@ typedef void (^DXBannerAction)(NSUInteger index, DXADBanner *banner);
 @interface DXADBanner : UIView
 
 @property (nonatomic, strong) NSArray *adItems;
-@property (nonatomic, assign) BOOL autoSroll;
+@property (nonatomic, assign) CGFloat autoSrollInterval;
 
 @end
 
-
-@interface DXADBannerPage : NIPagingScrollViewPage
-
-@property (nonatomic, strong) UIImageView *imageView;
-
-@end
 
 @interface DXImageBannerItem : NSObject<DXADBannerItem>
 

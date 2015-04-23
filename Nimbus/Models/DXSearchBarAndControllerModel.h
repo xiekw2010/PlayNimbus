@@ -35,12 +35,23 @@ typedef void (^DXSearchResultBlock)(NSArray *results, NSString *searchText, NSSt
 
 @end
 
-@interface DXSearchBarAndControllerModel : NSObject<UISearchDisplayDelegate>
+@protocol DXSearchModelHistoryDataSource <NSObject>
+
+@optional
+- (UIView *)searchModelNeedAHotSearchView:(DXSearchBarAndControllerModel *)model;
+
+@end
+
+
+@interface DXSearchBarAndControllerModel : NSObject<UISearchDisplayDelegate, UISearchBarDelegate>
 
 - (instancetype)initWithContentsViewController:(UIViewController *)contentsViewController searchScopes:(NSArray *)scopes predicateDelegate:(id<DXSearchModelDelegate>)delegate;
 - (void)refreshTheResultTableViewWithSearchBar:(UISearchBar *)searchBar;
 
 @property (nonatomic, weak) id<DXSearchModelDelegate> searchPredicateDelegate;
+@property (nonatomic, weak) id<DXSearchModelHistoryDataSource> dataSource;
+// default is YES;
+@property (nonatomic, assign, getter=isUsingHistory) BOOL usingHistory;
 @property (nonatomic, strong, readonly) UISearchBar *searchBar;
 @property (nonatomic, strong, readonly) NITableViewActions *displayTableViewActions;
 @property (nonatomic, strong, readonly) UISearchDisplayController *displayController;

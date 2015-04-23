@@ -10,34 +10,30 @@
 #import "DXSearchBarAndControllerModel.h"
 #import "NimbusCore.h"
 
-@protocol DXHistorySearchDelegate <NSObject>
-
-@end
 
 @interface DXNavigationSearchModel : NSObject
 
-@property (nonatomic, strong) UISearchBar *navSearchBar;
+@property (nonatomic, strong, readonly) UISearchBar *navSearchBar;
 @property (nonatomic, weak) UIViewController *contentsViewController;
 @property (nonatomic, weak) id<DXSearchModelDelegate> delegate;
+@property (nonatomic, weak) id<DXSearchModelHistoryDataSource> dataSource;
 
 - (instancetype)initWithTarget:(UIViewController *)vc;
 
 @end
 
 
-// use the Designated initializer sepcify the cell class
-@interface DXSearchHistoryCellObject : NSObject<NSCoding, NICellObject>
+@protocol DXSearchHotView <NSObject>
 
-@property (nonatomic, strong) NSDate *timestamp;
-@property (nonatomic, strong) NSString *name;
-
-
-+ (NSArray *)historyObjects;
-+ (void)enqueueObject:(DXSearchHistoryCellObject *)object;
-+ (void)dequeueObject:(DXSearchHistoryCellObject *)object;
+@optional
+- (NSString *)title;
 
 @end
 
-@interface DXSearchHistoryCell : UITableViewCell<NICell>
+@interface DXSearchHotView : UIView<DXSearchHotView>
+
+- (id)initWithTarget:(id)actionTarget hotTags:(NSArray *)hotTags title:(NSString *)title;
+
+- (NSString *)title;
 
 @end

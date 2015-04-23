@@ -9,6 +9,14 @@
 #import "DXADBanner.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
+
+@interface DXADBannerPage : NIPagingScrollViewPage
+
+@property (nonatomic, strong) UIImageView *imageView;
+
+@end
+
+
 @interface DXADBanner ()<NIPagingScrollViewDataSource, NIPagingScrollViewDelegate>
 
 @property (nonatomic, strong) NIPagingScrollView *scrollView;
@@ -20,6 +28,12 @@
 @end
 
 @implementation DXADBanner
+
+- (void)dealloc
+{
+    [self stopTimer];
+}
+
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -37,6 +51,7 @@
     _scrollView.dataSource = self;
     _scrollView.pageMargin = 0.0;
     _scrollView.type = NIPagingScrollViewHorizontal;
+    _scrollView.delegate = self;
     
     [self addSubview:_scrollView];
     
@@ -47,13 +62,19 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapPage:)];
     [_scrollView addGestureRecognizer:tap];
+    
+    self.autoSrollInterval = 5.0;
 }
 
 - (void)didTapPage:(id)sender
 {
     NSUInteger currentIndex = _scrollView.centerPageIndex - 1;
-    id item = self.adItems[currentIndex - 1];
-    NSLog(@"didTap %ld and item is %@", currentIndex, item);
+    id item = self.adItems[currentIndex];
+
+    if ([item respondsToSelector:@selector(action)]) {
+        id<DXADBannerItem> bannerItem = item;
+        bannerItem.action(self, currentIndex, item);
+    }
 }
 
 - (void)setAdItems:(NSArray *)adItems
@@ -62,6 +83,7 @@
     _pageControl.numberOfPages = _adItems.count;
     [_scrollView reloadData];
     [_scrollView moveToPageAtIndex:1 animated:NO];
+    [self startTimer];
 }
 
 - (void)layoutSubviews
@@ -138,6 +160,34 @@
     }else{
         _pageControl.currentPage = pagingScrollView.centerPageIndex;
     }
+}
+
+- (void)startTimer
+{
+    [self stopTimer];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:self.autoSrollInterval target:self selector:@selector(moveToNextPage) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+}
+
+- (void)moveToNextPage
+{
+    [_scrollView moveToNextAnimated:YES];
+}
+
+- (void)stopTimer
+{
+    [self.timer invalidate];
+    self.timer = nil;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self stopTimer];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    [self startTimer];
 }
 
 

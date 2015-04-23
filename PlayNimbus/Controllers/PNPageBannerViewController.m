@@ -31,8 +31,8 @@
     [self.view addSubview:_banner];
     
     CGSize bannerSize = _banner.bounds.size;
-    DXBannerAction action = ^(NSUInteger index, DXADBanner *banner) {
-        NSLog(@"did select at %ld", (long)index);
+    DXBannerAction action = ^(DXADBanner *bannner, NSUInteger index, id<DXADBannerItem>item) {
+        NSLog(@"did select at %ld and item is %@", (long)index, item.imageURL);
     };
     NSArray *bannerobjs = @[
                             [DXImageBannerItem bannerObjectWithPlaceholder:[UIImage imageWithColor:[UIColor randomColor] cropSize:bannerSize] imageURL:[NSURL URLWithString:@"http://gtms03.alicdn.com/tps/i3/TB1HKGsHFXXXXXHXXXXTdm96pXX-1190-40.jpg"] actionBlock:action],
