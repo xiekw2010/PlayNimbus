@@ -8,33 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-
-@protocol DXHotTagObject;
-
-typedef void (^DXSearchHotTagAction)(UIViewController *visibleViewController, id<DXHotTagObject>hotTagObject);
-
-
-@protocol DXHotTagObject <NSObject>
-
-@property (nonatomic, copy) DXSearchHotTagAction action;
-@property (nonatomic, copy) NSString *title;
-
-@end
-
-
+@class DXSearchBarAndControllerModel;
 
 @interface DXSearchHotTagsHeader : UIView
 
-- (id)initWithHotTags:(NSArray *)hotTags;
+- (id)initWithHotTags:(NSArray *)hotTags containerViewController:(DXSearchBarAndControllerModel *)searchModel;
 + (CGFloat)heightForHotTagsCount:(NSUInteger)count;
 
 @end
 
-@interface DXSearchHotTagObject : NSObject<DXHotTagObject>
-
-+ (instancetype)objectWithTitle:(NSString *)title action:(DXSearchHotTagAction)action;
-
-@end
 
 @interface DXSearchHotTagButton : UIButton
 

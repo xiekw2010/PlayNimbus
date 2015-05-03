@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		6D0E1B751CD369972C5EFB1E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36718537A5E5F1A9E429A2F5 /* libPods.a */; };
+		BE072A9C1AF605A40094AD90 /* DXCheckMarkLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE072A9B1AF605A40094AD90 /* DXCheckMarkLayer.m */; };
+		BE072A9F1AF605B60094AD90 /* DXCrossLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE072A9E1AF605B60094AD90 /* DXCrossLayer.m */; };
+		BE072AA21AF605CC0094AD90 /* DXTriangleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE072AA11AF605CC0094AD90 /* DXTriangleLayer.m */; };
+		BE072AA51AF607540094AD90 /* DXLineShaperLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE072AA41AF607540094AD90 /* DXLineShaperLayer.m */; };
 		BE1360871AE8F37D0099BA7A /* DXSearchHotTagsHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1360861AE8F37D0099BA7A /* DXSearchHotTagsHeader.m */; };
 		BE3201991ADFA57000AD073F /* FLEX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3201981ADFA57000AD073F /* FLEX.framework */; };
 		BE32019C1ADFA78300AD073F /* UICategory.m in Sources */ = {isa = PBXBuildFile; fileRef = BE32019B1ADFA78300AD073F /* UICategory.m */; };
@@ -87,6 +91,9 @@
 		BEDBC3C91AE7949E0023CB84 /* DXNavigationSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDBC3C81AE7949E0023CB84 /* DXNavigationSearchModel.m */; };
 		BEDBC3CC1AE797CF0023CB84 /* PNNavSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDBC3CB1AE797CF0023CB84 /* PNNavSearchViewController.m */; };
 		BEDBC3FA1AE8E9470023CB84 /* DXSearchHistoryCellObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDBC3F91AE8E9470023CB84 /* DXSearchHistoryCellObject.m */; };
+		BEE220F31AEDF0DC007F44F5 /* DXGridLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE220F21AEDF0DC007F44F5 /* DXGridLayoutView.m */; };
+		BEE220FB1AEE706F007F44F5 /* PNContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE220FA1AEE706F007F44F5 /* PNContainerViewController.m */; };
+		BEEDB8161AF21D0600C58AA6 /* DXSearchHotTagObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEDB8151AF21D0600C58AA6 /* DXSearchHotTagObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +109,14 @@
 /* Begin PBXFileReference section */
 		36718537A5E5F1A9E429A2F5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C1DFF7214B2BCF5CCA4D9E9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		BE072A9A1AF605A40094AD90 /* DXCheckMarkLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXCheckMarkLayer.h; sourceTree = "<group>"; };
+		BE072A9B1AF605A40094AD90 /* DXCheckMarkLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXCheckMarkLayer.m; sourceTree = "<group>"; };
+		BE072A9D1AF605B60094AD90 /* DXCrossLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXCrossLayer.h; sourceTree = "<group>"; };
+		BE072A9E1AF605B60094AD90 /* DXCrossLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXCrossLayer.m; sourceTree = "<group>"; };
+		BE072AA01AF605CC0094AD90 /* DXTriangleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXTriangleLayer.h; sourceTree = "<group>"; };
+		BE072AA11AF605CC0094AD90 /* DXTriangleLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXTriangleLayer.m; sourceTree = "<group>"; };
+		BE072AA31AF607540094AD90 /* DXLineShaperLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXLineShaperLayer.h; sourceTree = "<group>"; };
+		BE072AA41AF607540094AD90 /* DXLineShaperLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXLineShaperLayer.m; sourceTree = "<group>"; };
 		BE1360851AE8F37D0099BA7A /* DXSearchHotTagsHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXSearchHotTagsHeader.h; sourceTree = "<group>"; };
 		BE1360861AE8F37D0099BA7A /* DXSearchHotTagsHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXSearchHotTagsHeader.m; sourceTree = "<group>"; };
 		BE3201981ADFA57000AD073F /* FLEX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FLEX.framework; sourceTree = "<group>"; };
@@ -277,6 +292,13 @@
 		BEDBC3CB1AE797CF0023CB84 /* PNNavSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNNavSearchViewController.m; sourceTree = "<group>"; };
 		BEDBC3F81AE8E9470023CB84 /* DXSearchHistoryCellObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXSearchHistoryCellObject.h; sourceTree = "<group>"; };
 		BEDBC3F91AE8E9470023CB84 /* DXSearchHistoryCellObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXSearchHistoryCellObject.m; sourceTree = "<group>"; };
+		BEE220F11AEDF0DC007F44F5 /* DXGridLayoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXGridLayoutView.h; sourceTree = "<group>"; };
+		BEE220F21AEDF0DC007F44F5 /* DXGridLayoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXGridLayoutView.m; sourceTree = "<group>"; };
+		BEE220F81AEE0111007F44F5 /* DXGridLayoutDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DXGridLayoutDefines.h; sourceTree = "<group>"; };
+		BEE220F91AEE706F007F44F5 /* PNContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNContainerViewController.h; sourceTree = "<group>"; };
+		BEE220FA1AEE706F007F44F5 /* PNContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNContainerViewController.m; sourceTree = "<group>"; };
+		BEEDB8141AF21D0600C58AA6 /* DXSearchHotTagObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXSearchHotTagObject.h; sourceTree = "<group>"; };
+		BEEDB8151AF21D0600C58AA6 /* DXSearchHotTagObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXSearchHotTagObject.m; sourceTree = "<group>"; };
 		FB85ECB35175696AD33B9926 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -315,6 +337,21 @@
 				36718537A5E5F1A9E429A2F5 /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BE072A981AF605660094AD90 /* ShaperLayers */ = {
+			isa = PBXGroup;
+			children = (
+				BE072AA31AF607540094AD90 /* DXLineShaperLayer.h */,
+				BE072AA41AF607540094AD90 /* DXLineShaperLayer.m */,
+				BE072A9A1AF605A40094AD90 /* DXCheckMarkLayer.h */,
+				BE072A9B1AF605A40094AD90 /* DXCheckMarkLayer.m */,
+				BE072A9D1AF605B60094AD90 /* DXCrossLayer.h */,
+				BE072A9E1AF605B60094AD90 /* DXCrossLayer.m */,
+				BE072AA01AF605CC0094AD90 /* DXTriangleLayer.h */,
+				BE072AA11AF605CC0094AD90 /* DXTriangleLayer.m */,
+			);
+			name = ShaperLayers;
 			sourceTree = "<group>";
 		};
 		BE3A31EB1AE9444600C06D5E /* SearchModel */ = {
@@ -406,6 +443,7 @@
 		BE48C7CE1AC15AB000044490 /* Nimbus */ = {
 			isa = PBXGroup;
 			children = (
+				BE072A981AF605660094AD90 /* ShaperLayers */,
 				BE48C7CF1AC15AB000044490 /* Attributed Label */,
 				BE48C7D51AC15AB000044490 /* Badge */,
 				BE48C7D91AC15AB000044490 /* Collections */,
@@ -572,6 +610,9 @@
 				BE48C8451AC15AB000044490 /* NIPagingScrollViewPage.m */,
 				BEDBC3BE1AE75EBE0023CB84 /* DXADBanner.h */,
 				BEDBC3BF1AE75EBE0023CB84 /* DXADBanner.m */,
+				BEE220F11AEDF0DC007F44F5 /* DXGridLayoutView.h */,
+				BEE220F21AEDF0DC007F44F5 /* DXGridLayoutView.m */,
+				BEE220F81AEE0111007F44F5 /* DXGridLayoutDefines.h */,
 			);
 			path = "Paging Scroll View";
 			sourceTree = "<group>";
@@ -689,6 +730,8 @@
 			children = (
 				BE9D51971AC258D1004AF000 /* PNBadgeViewController.h */,
 				BE9D51981AC258D1004AF000 /* PNBadgeViewController.m */,
+				BEE220F91AEE706F007F44F5 /* PNContainerViewController.h */,
+				BEE220FA1AEE706F007F44F5 /* PNContainerViewController.m */,
 			);
 			name = "Badge View";
 			sourceTree = "<group>";
@@ -720,6 +763,8 @@
 				BEDBC3F91AE8E9470023CB84 /* DXSearchHistoryCellObject.m */,
 				BE1360851AE8F37D0099BA7A /* DXSearchHotTagsHeader.h */,
 				BE1360861AE8F37D0099BA7A /* DXSearchHotTagsHeader.m */,
+				BEEDB8141AF21D0600C58AA6 /* DXSearchHotTagObject.h */,
+				BEEDB8151AF21D0600C58AA6 /* DXSearchHotTagObject.m */,
 			);
 			name = SearchHistoryObjects;
 			sourceTree = "<group>";
@@ -882,11 +927,14 @@
 				BE8A35B91AC3E20300C6F4A4 /* PNCustomCell.m in Sources */,
 				BE48C9351AC15E7C00044490 /* NIRadioGroupController.m in Sources */,
 				BE48C9301AC15E7C00044490 /* NICellCatalog.m in Sources */,
+				BE072A9F1AF605B60094AD90 /* DXCrossLayer.m in Sources */,
 				BE48C9091AC15D4E00044490 /* NISDKAvailability.m in Sources */,
 				BE48C9041AC15D4E00044490 /* NINonEmptyCollectionTesting.m in Sources */,
 				BE8A35BC1AC3E25600C6F4A4 /* DXUtilViews.m in Sources */,
 				BE48C8FF1AC15D4E00044490 /* NIFoundationMethods.m in Sources */,
+				BE072AA51AF607540094AD90 /* DXLineShaperLayer.m in Sources */,
 				BE9D51A21AC259BE004AF000 /* PNPlusRowViewController.m in Sources */,
+				BEE220FB1AEE706F007F44F5 /* PNContainerViewController.m in Sources */,
 				BE48C9401AC15FC600044490 /* UIImage+AppleBlur.m in Sources */,
 				BE48C9311AC15E7C00044490 /* NICellFactory.m in Sources */,
 				BE1360871AE8F37D0099BA7A /* DXSearchHotTagsHeader.m in Sources */,
@@ -896,12 +944,15 @@
 				BE48C8791AC15AB000044490 /* NIWebController.m in Sources */,
 				BE48C8FB1AC15D4E00044490 /* NIDataStructures.m in Sources */,
 				BE9D51961AC258C3004AF000 /* PNPageViewController.m in Sources */,
+				BE072A9C1AF605A40094AD90 /* DXCheckMarkLayer.m in Sources */,
 				BE48C9071AC15D4E00044490 /* NIPaths.m in Sources */,
 				BE48C9081AC15D4E00044490 /* NIRuntimeClassModifications.m in Sources */,
 				BE48C8F91AC15D4E00044490 /* NIButtonUtilities.m in Sources */,
 				BE48C8781AC15AB000044490 /* NIPagingScrollViewPage.m in Sources */,
+				BE072AA21AF605CC0094AD90 /* DXTriangleLayer.m in Sources */,
 				BE48C93A1AC15EE000044490 /* NIImageProcessing.m in Sources */,
 				BE48C9321AC15E7C00044490 /* NIFormCellCatalog.m in Sources */,
+				BEEDB8161AF21D0600C58AA6 /* DXSearchHotTagObject.m in Sources */,
 				BE48C8F81AC15D4E00044490 /* NIActions.m in Sources */,
 				BE48C90B1AC15D4E00044490 /* NIState.m in Sources */,
 				BE48C8771AC15AB000044490 /* NIPagingScrollView.m in Sources */,
@@ -915,6 +966,7 @@
 				BEDBC3C01AE75EBE0023CB84 /* DXADBanner.m in Sources */,
 				BE48C90D1AC15D4E00044490 /* UIResponder+NimbusCore.m in Sources */,
 				BE48C9341AC15E7C00044490 /* NIRadioGroup.m in Sources */,
+				BEE220F31AEDF0DC007F44F5 /* DXGridLayoutView.m in Sources */,
 				BE48C9371AC15E7C00044490 /* NITableViewModel.m in Sources */,
 				BE48C9031AC15D4E00044490 /* NINetworkActivity.m in Sources */,
 				BE48C92F1AC15E7C00044490 /* NICellBackgrounds.m in Sources */,

@@ -32,6 +32,8 @@
     if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier]) {
         _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [self.contentView addSubview:_indicatorView];
+        self.backgroundColor = self.contentView.backgroundColor = [UIColor clearColor];
+        self.textLabel.backgroundColor = [UIColor clearColor];
     }
     return self;
 }

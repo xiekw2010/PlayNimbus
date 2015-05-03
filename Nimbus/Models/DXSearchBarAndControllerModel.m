@@ -14,14 +14,18 @@
 #import "DXSearchCell.h"
 #import <objc/runtime.h>
 #import "DXSearchHistoryCellObject.h"
+#import "DXSearchHotTagsHeader.h"
 
 // Do the default delegate and forward the delegate
 
-@interface DXSearchBarAndControllerModel ()
+@interface DXSearchBarAndControllerModel ()<UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *historyTableView;
-@property (nonatomic, strong) NITableViewModel *model;
-@property (nonatomic, strong) NITableViewActions *actions;
+@property (nonatomic, strong) NITableViewModel *historyModel;
+@property (nonatomic, strong) NITableViewActions *historyActions;
+@property (nonatomic, strong) NICellFactory *historyCellFactory;
+@property (nonatomic, strong, readonly) NIMutableTableViewModel *displayTableViewModel;
+@property (nonatomic, strong) UIImageView *blurBackImageView;
 
 @end
 
@@ -33,7 +37,6 @@
 - (instancetype)initWithContentsViewController:(UIViewController *)contentsViewController searchScopes:(NSArray *)scopes predicateDelegate:(id)delegate
 {
     if (self = [super init]) {
-        self.usingHistory = YES;
         _contentsViewController = contentsViewController;
         _searchPredicateDelegate = delegate;
         _displayTableViewModel = [[NIMutableTableViewModel alloc] initWithDelegate:(id)[NICellFactory class]];
@@ -120,13 +123,13 @@
     [self.displayController.searchResultsTableView reloadData];
 }
 
-- (void)refreshTheResultTableViewWithSearchBar:(UISearchBar *)searchBar
+- (void)refreshTheResultTableViewWithSearchText:(NSString *)sText
 {
     [self startAnimating];
     __weak typeof(self) wself = self;
-    [self.searchPredicateDelegate searchModel:self filterResultWithText:searchBar.text scopeField:[self currentSearchBarScope] resultBlock:^(NSArray *results, NSString *searchText, NSString *searchScope) {
+    [self.searchPredicateDelegate searchModel:self filterResultWithText:sText scopeField:[self currentSearchBarScope] resultBlock:^(NSArray *results, NSString *searchText, NSString *searchScope) {
         [self stopAnimating];
-        if (([searchText isEqualToString:searchBar.text] && searchText.length > 0) && ([searchScope isEqualToString:[self currentSearchBarScope]] || !searchScope)) {
+        if (([searchText isEqualToString:sText] && searchText.length > 0) && ([searchScope isEqualToString:[self currentSearchBarScope]] || !searchScope)) {
             [wself.displayTableViewModel addObjectsFromArray:results];
             [wself.displayController.searchResultsTableView reloadData];
         }
@@ -137,28 +140,40 @@
 
 - (void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
 {
-    if (self.isUsingHistory) {
-        UIView *dimmingView = [[_contentsViewController.view findRecursiveSubviewsIncludeSelf:NO specificPredicate:^BOOL(UIView *aView) {
-            return [aView isKindOfClass:[NSClassFromString(@"_UISearchDisplayControllerDimmingView") class]];
-        }] firstObject];
-        
-        if ([self.searchPredicateDelegate respondsToSelector:@selector(searchModel:configDimmingView:)]) {
-            _usingTheCustomDimmingView = YES;
-            [self.searchPredicateDelegate searchModel:self configDimmingView:dimmingView];
+    UIView *dimmingView = [[_contentsViewController.view findRecursiveSubviewsIncludeSelf:NO specificPredicate:^BOOL(UIView *aView) {
+        return [aView isKindOfClass:[NSClassFromString(@"_UISearchDisplayControllerDimmingView") class]];
+    }] firstObject];
+
+    if ([self.searchPredicateDelegate respondsToSelector:@selector(searchModel:configDimmingView:)]) {
+        _usingTheCustomDimmingView = YES;
+        [self.searchPredicateDelegate searchModel:self configDimmingView:dimmingView];
+        return;
+    }
+    
+    if (self.tableViewBackgroundImage) {
+        if (!self.blurBackImageView) {
+            self.blurBackImageView = [[UIImageView alloc] initWithFrame:dimmingView.bounds];
+            self.blurBackImageView.image = self.tableViewBackgroundImage;
         }
-        
-        if (_usingTheCustomDimmingView == NO) {
-            dimmingView.alpha = 1.0;
-            self.historyTableView.frame = dimmingView.bounds;
-            [dimmingView addSubview:self.historyTableView];
+        self.displayController.searchResultsTableView.backgroundColor = [UIColor colorWithPatternImage:self.tableViewBackgroundImage];
+    }
+    
+    if (_usingTheCustomDimmingView == NO) {
+        dimmingView.alpha = 1.0;
+        self.historyTableView.frame = dimmingView.bounds;
+        if (self.tableViewBackgroundImage) {
+            self.historyTableView.backgroundView = self.blurBackImageView;
         }
+        [dimmingView addSubview:self.historyTableView];
+        [self setupTableView];
     }
 }
+
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
 {
     if ([self.searchPredicateDelegate respondsToSelector:@selector(searchModel:filterResultWithText:scopeField:resultBlock:)]) {
-        [self refreshTheResultTableViewWithSearchBar:controller.searchBar];
+        [self refreshTheResultTableViewWithSearchText:controller.searchBar.text];
     }
     return YES;
 }
@@ -166,7 +181,7 @@
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
     if ([self.searchPredicateDelegate respondsToSelector:@selector(searchModel:filterResultWithText:scopeField:resultBlock:)]) {
-        [self refreshTheResultTableViewWithSearchBar:controller.searchBar];
+        [self refreshTheResultTableViewWithSearchText:controller.searchBar.text];
     }
     return YES;
 }
@@ -181,13 +196,11 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    if (self.isUsingHistory) {
-        if (searchBar.text.length > 0) {
-            [self refreshTheResultTableViewWithSearchBar:self.searchBar];
-            DXSearchHistoryCellObject *obj = [DXSearchHistoryCellObject new];
-            obj.name = searchBar.text;
-            [DXSearchHistoryCellObject enqueueObject:obj];
-        }
+    if (searchBar.text.length > 0) {
+        [self refreshTheResultTableViewWithSearchText:self.searchBar.text];
+        DXSearchHistoryCellObject *obj = [DXSearchHistoryCellObject new];
+        obj.name = searchBar.text;
+        [DXSearchHistoryCellObject enqueueObject:obj];
     }
 }
 
@@ -197,31 +210,69 @@
         _historyTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _historyTableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         _historyTableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
-        _actions = [[NITableViewActions alloc] initWithTarget:self];
-        _historyTableView.delegate = self.actions;
+        _historyActions = [[NITableViewActions alloc] initWithTarget:self];
+        _historyTableView.delegate = [self.historyActions forwardingTo:self];
     }
-    [self setupTableView];
     return _historyTableView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [self.historyCellFactory tableView:tableView heightForRowAtIndexPath:indexPath model:self.historyModel];
+}
+
+- (NICellFactory *)historyCellFactory
+{
+    if (!_historyCellFactory) {
+        _historyCellFactory = [NICellFactory new];
+    }
+    return _historyCellFactory;
 }
 
 - (void)setupTableView
 {
-    if (self.isUsingHistory == NO || _usingTheCustomDimmingView == YES) {
+    if (_usingTheCustomDimmingView == YES) {
         return;
     }
-    NSMutableArray *sectionArray = [@[@"hello", [NITitleCellObject objectWithTitle:@"hi"], [NITitleCellObject objectWithTitle:@"go"]] mutableCopy];
-    NSArray *historyObjects = [DXSearchHistoryCellObject historyObjects];
-    for (DXSearchHistoryCellObject *hobj in historyObjects) {
-        [_actions attachToObject:hobj detailBlock:^BOOL(id object, id target, NSIndexPath *indexPath) {
-            NSLog(@"current is %@", target);
-            return NO;
-        }];
+    
+    NSMutableArray *sectionArray = [NSMutableArray array];
+    if (self.hotTagObjects.count) {
+        NIDrawRectBlockCellObject *hotObject = [[NIDrawRectBlockCellObject alloc] initWithBlock:^CGFloat(CGRect rect, id object, UITableViewCell *cell) {
+            NSArray *tags = object;
+            DXSearchHotTagsHeader *header = [[DXSearchHotTagsHeader alloc] initWithHotTags:tags containerViewController:self];
+            [cell addSubview:header];
+            cell.backgroundColor = [UIColor clearColor];
+            header.backgroundColor = [UIColor clearColor];
+            return [DXSearchHotTagsHeader heightForHotTagsCount:tags.count];
+        } object:self.hotTagObjects];
+        [sectionArray addObject:@"热门搜索"];
+        [sectionArray addObject:hotObject];
     }
     
+    NSArray *historyObjects = [DXSearchHistoryCellObject historyObjects];
+    for (DXSearchHistoryCellObject *hobj in historyObjects) {
+        [_historyActions attachToObject:hobj tapBlock:^BOOL(DXSearchHistoryCellObject *object, id target, NSIndexPath *indexPath) {
+            self.searchBar.text = object.name;
+            return YES;
+        }];
+    }
     if (historyObjects.count) {
-        [sectionArray addObject:NSLocalizedString(@"历史搜索", nil)];
+        [sectionArray addObject:NSLocalizedString(@"搜索历史", nil)];
         [sectionArray addObjectsFromArray:historyObjects];
-        [sectionArray addObject:[_actions attachToObject:[NITitleCellObject objectWithTitle:NSLocalizedString(@"删除所有历史记录", nil)] tapBlock:^BOOL(id object, id target, NSIndexPath *indexPath) {
+        
+        NICellDrawRectBlock drawingBlock =  ^(CGRect rect, NSString *objectText, UITableViewCell* cell) {
+            UILabel *textLabel = [[UILabel alloc] initWithFrame:rect];
+            textLabel.backgroundColor = [UIColor clearColor];
+            textLabel.text = objectText;
+            textLabel.textAlignment = NSTextAlignmentCenter;
+            textLabel.textColor = [UIColor grayColor];
+            textLabel.font = [UIFont systemFontOfSize:16.0];
+            cell.backgroundColor = cell.contentView.backgroundColor = [UIColor clearColor];
+            [cell.contentView addSubview:textLabel];
+            return 44.0;
+        };
+        NIDrawRectBlockCellObject *drawClearHistoryObject = [[NIDrawRectBlockCellObject alloc] initWithBlock:drawingBlock object:NSLocalizedString(@"清除搜索记录", nil)];
+        [sectionArray addObject:[_historyActions attachToObject:drawClearHistoryObject tapBlock:^BOOL(id object, id target, NSIndexPath *indexPath) {
             [DXSearchHistoryCellObject removeAll];
             [self setupTableView];
             return YES;
@@ -229,10 +280,10 @@
     }
     
     
-    _model = [[NITableViewModel alloc] initWithSectionedArray:sectionArray delegate:(id)[NICellFactory class]];
+    _historyModel = [[NITableViewModel alloc] initWithSectionedArray:sectionArray delegate:self.historyCellFactory];
     
     __weak typeof(self) wself = self;
-    _model.createCellBlock = ^UITableViewCell * (UITableView* tableView, NSIndexPath* indexPath, id object){
+    _historyModel.createCellBlock = ^UITableViewCell * (UITableView* tableView, NSIndexPath* indexPath, id object){
         if ([object isKindOfClass:[DXSearchHistoryCellObject class]]) {
             Class cellClass = [object cellClass];
             NSString *identifier = NSStringFromClass(cellClass);
@@ -252,7 +303,7 @@
     };
     
     
-    _historyTableView.dataSource = self.model;
+    _historyTableView.dataSource = _historyModel;
     [_historyTableView reloadData];
 }
 

@@ -35,28 +35,23 @@ typedef void (^DXSearchResultBlock)(NSArray *results, NSString *searchText, NSSt
 
 @end
 
-@protocol DXSearchModelHistoryDataSource <NSObject>
-
-@optional
-- (UIView *)searchModelNeedAHotSearchView:(DXSearchBarAndControllerModel *)model;
-
-@end
 
 
 @interface DXSearchBarAndControllerModel : NSObject<UISearchDisplayDelegate, UISearchBarDelegate>
 
 - (instancetype)initWithContentsViewController:(UIViewController *)contentsViewController searchScopes:(NSArray *)scopes predicateDelegate:(id<DXSearchModelDelegate>)delegate;
-- (void)refreshTheResultTableViewWithSearchBar:(UISearchBar *)searchBar;
 
 @property (nonatomic, weak) id<DXSearchModelDelegate> searchPredicateDelegate;
-@property (nonatomic, weak) id<DXSearchModelHistoryDataSource> dataSource;
 // default is YES;
-@property (nonatomic, assign, getter=isUsingHistory) BOOL usingHistory;
 @property (nonatomic, strong, readonly) UISearchBar *searchBar;
-@property (nonatomic, strong, readonly) NITableViewActions *displayTableViewActions;
-@property (nonatomic, strong, readonly) UISearchDisplayController *displayController;
 @property (nonatomic, weak, readonly) UIViewController *contentsViewController;
-@property (nonatomic, strong, readonly) NIMutableTableViewModel *displayTableViewModel;
+@property (nonatomic, strong, readonly) UISearchDisplayController *displayController;
+@property (nonatomic, strong, readonly) NITableViewActions *displayTableViewActions;
+//uses for history tableview, searching tableview, result tableView, for these three.
+@property (nonatomic, strong) UIImage *tableViewBackgroundImage;
+//Must conforms to <DXHotTagObject>
+@property (nonatomic, strong) NSArray *hotTagObjects;
 
+- (void)refreshTheResultTableViewWithSearchText:(NSString *)sText;
 
 @end

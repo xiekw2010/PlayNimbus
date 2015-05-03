@@ -14,26 +14,11 @@
 @interface DXNavigationSearchModel : NSObject
 
 @property (nonatomic, strong, readonly) UISearchBar *navSearchBar;
-@property (nonatomic, weak) UIViewController *contentsViewController;
 @property (nonatomic, weak) id<DXSearchModelDelegate> delegate;
-@property (nonatomic, weak) id<DXSearchModelHistoryDataSource> dataSource;
+@property (nonatomic, strong) NSArray *hotTagObjects;
+@property (nonatomic, strong) UIImage *tableViewBackgroundImage;
 
 - (instancetype)initWithTarget:(UIViewController *)vc;
 
 @end
 
-
-@protocol DXSearchHotView <NSObject>
-
-@optional
-- (NSString *)title;
-
-@end
-
-@interface DXSearchHotView : UIView<DXSearchHotView>
-
-- (id)initWithTarget:(id)actionTarget hotTags:(NSArray *)hotTags title:(NSString *)title;
-
-- (NSString *)title;
-
-@end

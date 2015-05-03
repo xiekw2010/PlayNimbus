@@ -13,6 +13,7 @@
 
 // Badge view
 #import "PNBadgeViewController.h"
+#import "PNContainerViewController.h"
 
 // Page Scroll View
 #import "PNPageViewController.h"
@@ -59,6 +60,8 @@
                                    [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"Banner view" subtitle:@"banner now"] navigationBlock:NIPushControllerAction([PNPageBannerViewController class])],
                                    @"Badge View",
                                    [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"Badge View" subtitle:@"use the badgeView"] navigationBlock:NIPushControllerAction([PNBadgeViewController class])],
+                                   [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"Container VC" subtitle:@"appearence container"] navigationBlock:NIPushControllerAction([PNContainerViewController class])],
+
                                    @"TableView events",
                                    [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"Scroll View"] navigationBlock:NIPushControllerAction([PNExploreScrollViewController class])],
                                    [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"tableViewPlus row"] navigationBlock:NIPushControllerAction([PNPlusRowViewController class])],

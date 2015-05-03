@@ -9,8 +9,9 @@
 #import "PNNavSearchViewController.h"
 #import "DXNavigationSearchModel.h"
 #import "NimbusCore.h"
+#import "DXSearchHotTagObject.h"
 
-@interface PNNavSearchViewController ()<DXSearchModelDelegate, DXSearchModelHistoryDataSource>
+@interface PNNavSearchViewController ()<DXSearchModelDelegate>
 {
     DXNavigationSearchModel *_navSearchModel;
 }
@@ -21,11 +22,37 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor whiteColor];
 
     self.title = @"navSearch";
     _navSearchModel = [[DXNavigationSearchModel alloc] initWithTarget:self];
     _navSearchModel.delegate = self;
+    
+    DXSearchHotTagAction action = ^(UIViewController *visibleViewController, DXSearchBarAndControllerModel *searchModel, id<DXHotTagObject>hotTagObject) {
+        searchModel.searchBar.text = hotTagObject.title;
+    };
+    _navSearchModel.hotTagObjects = @[
+                                      [DXSearchHotTagObject objectWithTitle:@"Good" action:action],
+                                      [DXSearchHotTagObject objectWithTitle:@"cool" action:action],
+                                      [DXSearchHotTagObject objectWithTitle:@"aa" action:action],
+                                      [DXSearchHotTagObject objectWithTitle:@"dd" action:action],
+                                      [DXSearchHotTagObject objectWithTitle:@"ee" action:action],
+                                      [DXSearchHotTagObject objectWithTitle:@"aa" action:action]
+                                      ];
+    
+    
     self.navigationItem.titleView = _navSearchModel.navSearchBar;
+    
+    UIView *vv = [[UIView alloc] initWithFrame:self.view.bounds];
+    vv.backgroundColor = [UIColor randomColor];
+    [self.view addSubview:vv];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    _navSearchModel.tableViewBackgroundImage = [[self.view screenShotImage] applyExtraLightEffect];
 }
 
 - (void)searchModel:(DXSearchBarAndControllerModel *)sModel filterResultWithText:(NSString *)currentText scopeField:(NSString *)field resultBlock:(DXSearchResultBlock)block

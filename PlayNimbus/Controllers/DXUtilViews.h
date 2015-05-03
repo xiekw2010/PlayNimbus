@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "NimbusModels.h"
 
+
+/* √ this shape */
 @interface _ConfirmView : UIView
 
 @property (nonatomic, strong) CAShapeLayer *checkLayer;

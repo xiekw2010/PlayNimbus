@@ -7,6 +7,7 @@
 //
 
 #import "DXSearchHistoryCellObject.h"
+#import "DXCrossLayer.h"
 
 @implementation DXSearchHistoryCellObject
 
@@ -103,10 +104,14 @@
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btn setBackgroundImage:[UIImage imageWithColor:[UIColor randomColor] cropSize:CGSizeMake(30.0, 30.0)] forState:UIControlStateNormal];
+        
+        DXCrossLayer *layer = [DXCrossLayer new];
+        layer.bounds = CGRectMake(0, 0, 15.0, 15.0);
+        [btn setImage:layer.normalImage forState:UIControlStateNormal];
         btn.frame = CGRectMake(0, 0, 30.0, 30.0);
         self.accessoryView = btn;
         [btn addTarget:self action:@selector(btnTap) forControlEvents:UIControlEventTouchUpInside];
+        self.backgroundColor = self.contentView.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
