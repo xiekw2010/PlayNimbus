@@ -7,6 +7,7 @@
 //
 
 #import "DXSearchHotTagObject.h"
+#import "DXSearchBarAndControllerModel.h"
 
 @implementation DXSearchHotTagObject
 
@@ -17,6 +18,13 @@
 {
     DXSearchHotTagObject *obj = [DXSearchHotTagObject new];
     obj.title = title;
+    if (!action) {
+        DXSearchHotTagAction defaultAction = ^(UIViewController *visibleViewController, DXSearchBarAndControllerModel *searchModel, id<DXHotTagObject>hotTagObject) {
+            searchModel.searchBar.text = hotTagObject.title;
+        };
+
+        action = defaultAction;
+    }
     obj.action = action;
     return obj;
 }

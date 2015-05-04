@@ -49,6 +49,7 @@
         UISearchBar *navSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(screenBounds), 44)];
         navSearchBar.delegate = self;
         _navSearchBar = navSearchBar;
+        self.delegate = (id)vc;
     }
     return self;
 }

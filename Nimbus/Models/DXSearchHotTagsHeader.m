@@ -44,8 +44,8 @@ static inline NSUInteger calLineCount(NSUInteger objsCount) {
             NSUInteger cm = (_hotTags.count - i * column);
             for (int j = 0; j < cm; j ++) {
                 DXSearchHotTagButton *btn = [DXSearchHotTagButton new];
-                NSUInteger currentIndex = i * j + j;
-                btn.tag = i * j + j;
+                NSUInteger currentIndex = i * column + j;
+                btn.tag = currentIndex;
                 id<DXHotTagObject> obj = _hotTags[currentIndex];
                 [btn setTitle:obj.title forState:UIControlStateNormal];
                 btn.frame = [self tagButtonFrameForLine:i column:j];

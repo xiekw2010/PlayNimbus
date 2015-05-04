@@ -24,6 +24,7 @@
 @property (nonatomic, strong) NITableViewModel *historyModel;
 @property (nonatomic, strong) NITableViewActions *historyActions;
 @property (nonatomic, strong) NICellFactory *historyCellFactory;
+@property (nonatomic, strong) NICellFactory *displayCellFactory;
 @property (nonatomic, strong, readonly) NIMutableTableViewModel *displayTableViewModel;
 @property (nonatomic, strong) UIImageView *blurBackImageView;
 
@@ -39,7 +40,8 @@
     if (self = [super init]) {
         _contentsViewController = contentsViewController;
         _searchPredicateDelegate = delegate;
-        _displayTableViewModel = [[NIMutableTableViewModel alloc] initWithDelegate:(id)[NICellFactory class]];
+        _displayCellFactory = [NICellFactory new];
+        _displayTableViewModel = [[NIMutableTableViewModel alloc] initWithDelegate:_displayCellFactory];
         _displayTableViewActions = [[NITableViewActions alloc] initWithTarget:contentsViewController];
         CGRect screenBounds = [[UIScreen mainScreen] bounds];
         UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(screenBounds), 44.0)];
@@ -51,6 +53,7 @@
         displayViewController.searchBar.delegate = self;
         displayViewController.delegate = self;
         displayViewController.searchResultsDataSource = _displayTableViewModel;
+        [_displayTableViewActions forwardingTo:self];
         displayViewController.searchResultsDelegate = [_displayTableViewActions forwardingTo:(id)contentsViewController];
         _searchBar = searchBar;
         _displayController = displayViewController;
@@ -218,7 +221,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [self.historyCellFactory tableView:tableView heightForRowAtIndexPath:indexPath model:self.historyModel];
+    if (tableView == _historyTableView) {
+        return [self.historyCellFactory tableView:tableView heightForRowAtIndexPath:indexPath model:self.historyModel];
+    }else if (tableView == self.displayController.searchResultsTableView) {
+        return [self.displayCellFactory tableView:tableView heightForRowAtIndexPath:indexPath model:self.displayTableViewModel];
+    }else {
+        return 44.0;
+    }
 }
 
 - (NICellFactory *)historyCellFactory
