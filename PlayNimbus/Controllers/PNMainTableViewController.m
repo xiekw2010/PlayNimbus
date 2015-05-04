@@ -65,11 +65,12 @@
                                    @"TableView events",
                                    [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"Scroll View"] navigationBlock:NIPushControllerAction([PNExploreScrollViewController class])],
                                    [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"tableViewPlus row"] navigationBlock:NIPushControllerAction([PNPlusRowViewController class])],
-                                   [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"Search bar"] navigationBlock:NIPushControllerAction([PNFormTableViewController class])],
                                    [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"Radio table"] navigationBlock:NIPushControllerAction([PNRadioViewController class])],
                                    [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"Mutable table"] navigationBlock:NIPushControllerAction([PNMutableTableViewController class])],
-                                   [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"nav search"] navigationBlock:NIPushControllerAction([PNNavSearchViewController class])]
-
+                                   @"Search Model",
+                                   [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"Default search"] navigationBlock:NIPushControllerAction([PNFormTableViewController class])],
+                                   [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"nav search"] navigationBlock:NIPushControllerAction([PNNavSearchViewController class])],
+                                   [_actions attachToObject:[NISubtitleCellObject objectWithTitle:@"custom search"] navigationBlock:NIPushControllerAction([PNMutableTableViewController class])]
                                    ];
         
         _model = [[NITableViewModel alloc] initWithSectionedArray:sectionsArray delegate:(id)[NICellFactory class]];

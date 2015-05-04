@@ -30,9 +30,6 @@ typedef void (^DXSearchResultBlock)(NSArray *results, NSString *searchText, NSSt
          scopeField:(NSString *)field
         resultBlock:(DXSearchResultBlock)block;
 
-@optional
-- (void)searchModel:(DXSearchBarAndControllerModel *)sModel configDimmingView:(UIView *)dimmingView;
-
 @end
 
 
@@ -48,6 +45,7 @@ typedef void (^DXSearchResultBlock)(NSArray *results, NSString *searchText, NSSt
 @property (nonatomic, strong, readonly) UISearchDisplayController *displayController;
 @property (nonatomic, strong, readonly) NITableViewActions *displayTableViewActions;
 //uses for history tableview, searching tableview, result tableView, for these three.
+@property (nonatomic, assign, getter=isUsingHistory) BOOL usingHistory;
 @property (nonatomic, strong) UIImage *tableViewBackgroundImage;
 //Must conforms to <DXHotTagObject>
 @property (nonatomic, strong) NSArray *hotTagObjects;

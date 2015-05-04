@@ -23,25 +23,23 @@
 @property (nonatomic, strong) UITableView *historyTableView;
 @property (nonatomic, strong) NITableViewModel *historyModel;
 @property (nonatomic, strong) NITableViewActions *historyActions;
-@property (nonatomic, strong) NICellFactory *historyCellFactory;
-@property (nonatomic, strong) NICellFactory *displayCellFactory;
+@property (nonatomic, strong) NICellFactory *cellFactory;
 @property (nonatomic, strong, readonly) NIMutableTableViewModel *displayTableViewModel;
 @property (nonatomic, strong) UIImageView *blurBackImageView;
 
 @end
 
 @implementation DXSearchBarAndControllerModel
-{
-    BOOL _usingTheCustomDimmingView;
-}
+
 
 - (instancetype)initWithContentsViewController:(UIViewController *)contentsViewController searchScopes:(NSArray *)scopes predicateDelegate:(id)delegate
 {
     if (self = [super init]) {
+        self.usingHistory = YES;
         _contentsViewController = contentsViewController;
         _searchPredicateDelegate = delegate;
-        _displayCellFactory = [NICellFactory new];
-        _displayTableViewModel = [[NIMutableTableViewModel alloc] initWithDelegate:_displayCellFactory];
+        _cellFactory = [NICellFactory new];
+        _displayTableViewModel = [[NIMutableTableViewModel alloc] initWithDelegate:_cellFactory];
         _displayTableViewActions = [[NITableViewActions alloc] initWithTarget:contentsViewController];
         CGRect screenBounds = [[UIScreen mainScreen] bounds];
         UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(screenBounds), 44.0)];
@@ -130,9 +128,17 @@
 {
     [self startAnimating];
     __weak typeof(self) wself = self;
-    [self.searchPredicateDelegate searchModel:self filterResultWithText:sText scopeField:[self currentSearchBarScope] resultBlock:^(NSArray *results, NSString *searchText, NSString *searchScope) {
+    [self.searchPredicateDelegate searchModel:self
+                         filterResultWithText:sText
+                                   scopeField:[self currentSearchBarScope]
+                                  resultBlock:^(NSArray *results,
+                                                NSString *searchText,
+                                                NSString *searchScope)
+    {
         [self stopAnimating];
-        if (([searchText isEqualToString:sText] && searchText.length > 0) && ([searchScope isEqualToString:[self currentSearchBarScope]] || !searchScope)) {
+        if (([searchText isEqualToString:sText] && searchText.length > 0)
+            && ([searchScope isEqualToString:[self currentSearchBarScope]] || !searchScope)
+            && self.contentsViewController != nil) {
             [wself.displayTableViewModel addObjectsFromArray:results];
             [wself.displayController.searchResultsTableView reloadData];
         }
@@ -143,25 +149,22 @@
 
 - (void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
 {
-    UIView *dimmingView = [[_contentsViewController.view findRecursiveSubviewsIncludeSelf:NO specificPredicate:^BOOL(UIView *aView) {
-        return [aView isKindOfClass:[NSClassFromString(@"_UISearchDisplayControllerDimmingView") class]];
-    }] firstObject];
-
-    if ([self.searchPredicateDelegate respondsToSelector:@selector(searchModel:configDimmingView:)]) {
-        _usingTheCustomDimmingView = YES;
-        [self.searchPredicateDelegate searchModel:self configDimmingView:dimmingView];
-        return;
-    }
-    
-    if (self.tableViewBackgroundImage) {
-        if (!self.blurBackImageView) {
-            self.blurBackImageView = [[UIImageView alloc] initWithFrame:dimmingView.bounds];
-            self.blurBackImageView.image = self.tableViewBackgroundImage;
+    if (self.isUsingHistory) {
+        UIView *dimmingView = [[_contentsViewController.view
+                                findRecursiveSubviewsIncludeSelf:NO
+                                specificPredicate:^BOOL(UIView *aView)
+        {
+            return [aView isKindOfClass:[NSClassFromString(@"_UISearchDisplayControllerDimmingView") class]];
+        }] firstObject];
+        
+        if (self.tableViewBackgroundImage) {
+            if (!self.blurBackImageView) {
+                self.blurBackImageView = [[UIImageView alloc] initWithFrame:dimmingView.bounds];
+                self.blurBackImageView.image = self.tableViewBackgroundImage;
+            }
+            self.displayController.searchResultsTableView.backgroundColor = [UIColor colorWithPatternImage:self.tableViewBackgroundImage];
         }
-        self.displayController.searchResultsTableView.backgroundColor = [UIColor colorWithPatternImage:self.tableViewBackgroundImage];
-    }
-    
-    if (_usingTheCustomDimmingView == NO) {
+        
         dimmingView.alpha = 1.0;
         self.historyTableView.frame = dimmingView.bounds;
         if (self.tableViewBackgroundImage) {
@@ -201,9 +204,11 @@
 {
     if (searchBar.text.length > 0) {
         [self refreshTheResultTableViewWithSearchText:self.searchBar.text];
-        DXSearchHistoryCellObject *obj = [DXSearchHistoryCellObject new];
-        obj.name = searchBar.text;
-        [DXSearchHistoryCellObject enqueueObject:obj];
+        if (self.isUsingHistory) {
+            DXSearchHistoryCellObject *obj = [DXSearchHistoryCellObject new];
+            obj.name = searchBar.text;
+            [DXSearchHistoryCellObject enqueueObject:obj];
+        }
     }
 }
 
@@ -222,25 +227,17 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == _historyTableView) {
-        return [self.historyCellFactory tableView:tableView heightForRowAtIndexPath:indexPath model:self.historyModel];
+        return [_cellFactory tableView:tableView heightForRowAtIndexPath:indexPath model:self.historyModel];
     }else if (tableView == self.displayController.searchResultsTableView) {
-        return [self.displayCellFactory tableView:tableView heightForRowAtIndexPath:indexPath model:self.displayTableViewModel];
+        return [_cellFactory tableView:tableView heightForRowAtIndexPath:indexPath model:self.displayTableViewModel];
     }else {
         return 44.0;
     }
 }
 
-- (NICellFactory *)historyCellFactory
-{
-    if (!_historyCellFactory) {
-        _historyCellFactory = [NICellFactory new];
-    }
-    return _historyCellFactory;
-}
-
 - (void)setupTableView
 {
-    if (_usingTheCustomDimmingView == YES) {
+    if (!self.isUsingHistory) {
         return;
     }
     
@@ -288,8 +285,7 @@
         }]];
     }
     
-    
-    _historyModel = [[NITableViewModel alloc] initWithSectionedArray:sectionArray delegate:self.historyCellFactory];
+    _historyModel = [[NITableViewModel alloc] initWithSectionedArray:sectionArray delegate:_cellFactory];
     
     __weak typeof(self) wself = self;
     _historyModel.createCellBlock = ^UITableViewCell * (UITableView* tableView, NSIndexPath* indexPath, id object){

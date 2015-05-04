@@ -34,25 +34,15 @@
     return self;
 }
 
-- (void)searchModel:(DXSearchBarAndControllerModel *)sModel filterResultWithText:(NSString *)currentText scopeField:(NSString *)field searchBar:(UISearchBar *)searchBar resultBlock:(DXSearchResultBlock)block
-{
-    
-}
-
 - (void)searchModel:(DXSearchBarAndControllerModel *)sModel filterResultWithText:(NSString *)currentText scopeField:(NSString *)field resultBlock:(DXSearchResultBlock)block
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         NSArray *array = @[[NITitleCellObject objectWithTitle:@"a"],
                            [NITitleCellObject objectWithTitle:@"b"],
                            [NITitleCellObject objectWithTitle:@"c"]];
+        [sModel.displayTableViewActions attachToClass:[NITitleCellObject class] navigationBlock:NIPushControllerAction([self class])];
         block(array, currentText, field);
     });
-}
-
-- (BOOL)shouldCongfigSearchDimmingView:(UIView *)dimmingView
-{
-    dimmingView.backgroundColor = [UIColor redColor];
-    return YES;
 }
 
 - (void)viewDidLoad
@@ -64,6 +54,7 @@
     _tableView = tableView;
     
     _searchModel = [[DXSearchBarAndControllerModel alloc] initWithContentsViewController:self searchScopes:nil predicateDelegate:self];
+    _searchModel.usingHistory = NO;
     self.tableView.tableHeaderView = _searchModel.searchBar;
 }
 

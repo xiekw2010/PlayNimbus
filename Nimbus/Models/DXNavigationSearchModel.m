@@ -85,6 +85,7 @@
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     if (searchBar == _searchModel.searchBar) {
+        _searchModel.searchPredicateDelegate = nil;
         [_searchModel.displayController setActive:NO animated:NO];
         [self.contentsViewController.navigationController popViewControllerAnimated:NO];
     }

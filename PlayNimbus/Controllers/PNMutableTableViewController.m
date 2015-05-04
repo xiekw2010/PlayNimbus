@@ -53,22 +53,6 @@
     self.tableView.tableHeaderView = _searchModel.searchBar;
 }
 
-- (void)searchModel:(DXSearchBarAndControllerModel *)sModel configDimmingView:(UIView *)dimmingView
-{
-    for (UIView *vv in dimmingView.subviews) {
-        [vv removeFromSuperview];
-    }
-    dimmingView.alpha = 1.0;
-    dimmingView.backgroundColor = [UIColor clearColor];
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:dimmingView.bounds];
-    CGRect bounds = self.view.bounds;
-    CGFloat yOffset = CGRectGetHeight(sModel.searchBar.frame) + 44.0;
-    bounds.origin.y += yOffset;
-    bounds.size.height -= yOffset;
-    UIImage *blurImage = [[self.view screenShotImageWithBounds:bounds] applyExtraLightEffect];
-    imageView.image = blurImage;
-    [dimmingView addSubview:imageView];
-}
 
 - (void)searchModel:(DXSearchBarAndControllerModel *)sModel filterResultWithText:(NSString *)currentText
          scopeField:(NSString *)field
@@ -145,18 +129,7 @@
                         atIndexPath:(NSIndexPath *)indexPath
                          withObject:(id)object {
     UITableViewCell *cell = [NICellFactory tableViewModel:tableViewModel cellForTableView:tableView atIndexPath:indexPath withObject:object];
-    switch (indexPath.row % 3) {
-        case 0:
-            cell.backgroundColor = [UIColor orangeColor];
-            break;
-        case 1:
-            cell.backgroundColor = [UIColor redColor];
-            break;
-        case 2:
-            cell.backgroundColor = [UIColor yellowColor];
-        default:
-            break;
-    }
+    cell.backgroundColor = [UIColor randomColor];
     return cell;
 }
 
