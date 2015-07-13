@@ -8,10 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6D0E1B751CD369972C5EFB1E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36718537A5E5F1A9E429A2F5 /* libPods.a */; };
-		BE072A9C1AF605A40094AD90 /* DXCheckMarkLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE072A9B1AF605A40094AD90 /* DXCheckMarkLayer.m */; };
-		BE072A9F1AF605B60094AD90 /* DXCrossLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE072A9E1AF605B60094AD90 /* DXCrossLayer.m */; };
-		BE072AA21AF605CC0094AD90 /* DXTriangleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE072AA11AF605CC0094AD90 /* DXTriangleLayer.m */; };
-		BE072AA51AF607540094AD90 /* DXLineShaperLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE072AA41AF607540094AD90 /* DXLineShaperLayer.m */; };
 		BE1360871AE8F37D0099BA7A /* DXSearchHotTagsHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1360861AE8F37D0099BA7A /* DXSearchHotTagsHeader.m */; };
 		BE3201991ADFA57000AD073F /* FLEX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3201981ADFA57000AD073F /* FLEX.framework */; };
 		BE32019C1ADFA78300AD073F /* UICategory.m in Sources */ = {isa = PBXBuildFile; fileRef = BE32019B1ADFA78300AD073F /* UICategory.m */; };
@@ -71,6 +67,7 @@
 		BE48C9371AC15E7C00044490 /* NITableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BE48C92E1AC15E7C00044490 /* NITableViewModel.m */; };
 		BE48C93A1AC15EE000044490 /* NIImageProcessing.m in Sources */ = {isa = PBXBuildFile; fileRef = BE48C9391AC15EE000044490 /* NIImageProcessing.m */; };
 		BE48C9401AC15FC600044490 /* UIImage+AppleBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = BE48C93F1AC15FC600044490 /* UIImage+AppleBlur.m */; };
+		BE5FB1B21B53AD6B00CD3855 /* ALFLEXBOXUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5FB1B11B53AD6B00CD3855 /* ALFLEXBOXUtils.m */; };
 		BE8A35B51AC39CF300C6F4A4 /* PNRadioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8A35B41AC39CF300C6F4A4 /* PNRadioViewController.m */; };
 		BE8A35B91AC3E20300C6F4A4 /* PNCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8A35B81AC3E20300C6F4A4 /* PNCustomCell.m */; };
 		BE8A35BC1AC3E25600C6F4A4 /* DXUtilViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8A35BB1AC3E25600C6F4A4 /* DXUtilViews.m */; };
@@ -84,10 +81,16 @@
 		BE9D519C1AC258E4004AF000 /* PNAttributeLabelController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9D519B1AC258E4004AF000 /* PNAttributeLabelController.m */; };
 		BE9D51A21AC259BE004AF000 /* PNPlusRowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9D51A11AC259BE004AF000 /* PNPlusRowViewController.m */; };
 		BE9D51A51AC259E4004AF000 /* PNFormTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9D51A41AC259E4004AF000 /* PNFormTableViewController.m */; };
+		BED35F3E1AFF7EF500078F6F /* DXCheckMarkLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BED35F371AFF7EF500078F6F /* DXCheckMarkLayer.m */; };
+		BED35F3F1AFF7EF500078F6F /* DXCrossLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BED35F391AFF7EF500078F6F /* DXCrossLayer.m */; };
+		BED35F401AFF7EF500078F6F /* DXLineShaperLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BED35F3B1AFF7EF500078F6F /* DXLineShaperLayer.m */; };
+		BED35F411AFF7EF500078F6F /* DXTriangleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BED35F3D1AFF7EF500078F6F /* DXTriangleLayer.m */; };
+		BED35F441AFF7F0F00078F6F /* DXPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BED35F431AFF7F0F00078F6F /* DXPopupViewController.m */; };
+		BED35F471AFF81E200078F6F /* DXPagingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = BED35F461AFF81E200078F6F /* DXPagingScrollView.m */; };
+		BED35F4A1AFF8EA400078F6F /* Page1.m in Sources */ = {isa = PBXBuildFile; fileRef = BED35F491AFF8EA400078F6F /* Page1.m */; };
 		BEDBC3AC1AE4A6F20023CB84 /* PNExploreScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDBC3AB1AE4A6F20023CB84 /* PNExploreScrollViewController.m */; };
 		BEDBC3AF1AE4E12A0023CB84 /* PNPageBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDBC3AE1AE4E12A0023CB84 /* PNPageBannerViewController.m */; };
 		BEDBC3C01AE75EBE0023CB84 /* DXADBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDBC3BF1AE75EBE0023CB84 /* DXADBanner.m */; };
-		BEDBC3C31AE769C60023CB84 /* DXBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDBC3C11AE769C60023CB84 /* DXBanner.m */; };
 		BEDBC3C91AE7949E0023CB84 /* DXNavigationSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDBC3C81AE7949E0023CB84 /* DXNavigationSearchModel.m */; };
 		BEDBC3CC1AE797CF0023CB84 /* PNNavSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDBC3CB1AE797CF0023CB84 /* PNNavSearchViewController.m */; };
 		BEDBC3FA1AE8E9470023CB84 /* DXSearchHistoryCellObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDBC3F91AE8E9470023CB84 /* DXSearchHistoryCellObject.m */; };
@@ -109,14 +112,6 @@
 /* Begin PBXFileReference section */
 		36718537A5E5F1A9E429A2F5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C1DFF7214B2BCF5CCA4D9E9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		BE072A9A1AF605A40094AD90 /* DXCheckMarkLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXCheckMarkLayer.h; sourceTree = "<group>"; };
-		BE072A9B1AF605A40094AD90 /* DXCheckMarkLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXCheckMarkLayer.m; sourceTree = "<group>"; };
-		BE072A9D1AF605B60094AD90 /* DXCrossLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXCrossLayer.h; sourceTree = "<group>"; };
-		BE072A9E1AF605B60094AD90 /* DXCrossLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXCrossLayer.m; sourceTree = "<group>"; };
-		BE072AA01AF605CC0094AD90 /* DXTriangleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXTriangleLayer.h; sourceTree = "<group>"; };
-		BE072AA11AF605CC0094AD90 /* DXTriangleLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXTriangleLayer.m; sourceTree = "<group>"; };
-		BE072AA31AF607540094AD90 /* DXLineShaperLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXLineShaperLayer.h; sourceTree = "<group>"; };
-		BE072AA41AF607540094AD90 /* DXLineShaperLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXLineShaperLayer.m; sourceTree = "<group>"; };
 		BE1360851AE8F37D0099BA7A /* DXSearchHotTagsHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXSearchHotTagsHeader.h; sourceTree = "<group>"; };
 		BE1360861AE8F37D0099BA7A /* DXSearchHotTagsHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXSearchHotTagsHeader.m; sourceTree = "<group>"; };
 		BE3201981ADFA57000AD073F /* FLEX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FLEX.framework; sourceTree = "<group>"; };
@@ -252,6 +247,8 @@
 		BE48C9391AC15EE000044490 /* NIImageProcessing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIImageProcessing.m; sourceTree = "<group>"; };
 		BE48C93E1AC15FC600044490 /* UIImage+AppleBlur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+AppleBlur.h"; sourceTree = "<group>"; };
 		BE48C93F1AC15FC600044490 /* UIImage+AppleBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+AppleBlur.m"; sourceTree = "<group>"; };
+		BE5FB1B01B53AD6B00CD3855 /* ALFLEXBOXUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALFLEXBOXUtils.h; sourceTree = "<group>"; };
+		BE5FB1B11B53AD6B00CD3855 /* ALFLEXBOXUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALFLEXBOXUtils.m; sourceTree = "<group>"; };
 		BE8A35B31AC39CF300C6F4A4 /* PNRadioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNRadioViewController.h; sourceTree = "<group>"; };
 		BE8A35B41AC39CF300C6F4A4 /* PNRadioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNRadioViewController.m; sourceTree = "<group>"; };
 		BE8A35B71AC3E20300C6F4A4 /* PNCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNCustomCell.h; sourceTree = "<group>"; };
@@ -278,14 +275,26 @@
 		BE9D51A11AC259BE004AF000 /* PNPlusRowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPlusRowViewController.m; sourceTree = "<group>"; };
 		BE9D51A31AC259E4004AF000 /* PNFormTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNFormTableViewController.h; sourceTree = "<group>"; };
 		BE9D51A41AC259E4004AF000 /* PNFormTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNFormTableViewController.m; sourceTree = "<group>"; };
+		BED35F361AFF7EF500078F6F /* DXCheckMarkLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXCheckMarkLayer.h; sourceTree = "<group>"; };
+		BED35F371AFF7EF500078F6F /* DXCheckMarkLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXCheckMarkLayer.m; sourceTree = "<group>"; };
+		BED35F381AFF7EF500078F6F /* DXCrossLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXCrossLayer.h; sourceTree = "<group>"; };
+		BED35F391AFF7EF500078F6F /* DXCrossLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXCrossLayer.m; sourceTree = "<group>"; };
+		BED35F3A1AFF7EF500078F6F /* DXLineShaperLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXLineShaperLayer.h; sourceTree = "<group>"; };
+		BED35F3B1AFF7EF500078F6F /* DXLineShaperLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXLineShaperLayer.m; sourceTree = "<group>"; };
+		BED35F3C1AFF7EF500078F6F /* DXTriangleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXTriangleLayer.h; sourceTree = "<group>"; };
+		BED35F3D1AFF7EF500078F6F /* DXTriangleLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXTriangleLayer.m; sourceTree = "<group>"; };
+		BED35F421AFF7F0F00078F6F /* DXPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXPopupViewController.h; sourceTree = "<group>"; };
+		BED35F431AFF7F0F00078F6F /* DXPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXPopupViewController.m; sourceTree = "<group>"; };
+		BED35F451AFF81E200078F6F /* DXPagingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXPagingScrollView.h; sourceTree = "<group>"; };
+		BED35F461AFF81E200078F6F /* DXPagingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXPagingScrollView.m; sourceTree = "<group>"; };
+		BED35F481AFF8EA400078F6F /* Page1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Page1.h; sourceTree = "<group>"; };
+		BED35F491AFF8EA400078F6F /* Page1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Page1.m; sourceTree = "<group>"; };
 		BEDBC3AA1AE4A6F20023CB84 /* PNExploreScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNExploreScrollViewController.h; sourceTree = "<group>"; };
 		BEDBC3AB1AE4A6F20023CB84 /* PNExploreScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNExploreScrollViewController.m; sourceTree = "<group>"; };
 		BEDBC3AD1AE4E12A0023CB84 /* PNPageBannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNPageBannerViewController.h; sourceTree = "<group>"; };
 		BEDBC3AE1AE4E12A0023CB84 /* PNPageBannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPageBannerViewController.m; sourceTree = "<group>"; };
 		BEDBC3BE1AE75EBE0023CB84 /* DXADBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXADBanner.h; sourceTree = "<group>"; };
 		BEDBC3BF1AE75EBE0023CB84 /* DXADBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXADBanner.m; sourceTree = "<group>"; };
-		BEDBC3C11AE769C60023CB84 /* DXBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXBanner.m; sourceTree = "<group>"; };
-		BEDBC3C21AE769C60023CB84 /* DXBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXBanner.h; sourceTree = "<group>"; };
 		BEDBC3C71AE7949E0023CB84 /* DXNavigationSearchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXNavigationSearchModel.h; sourceTree = "<group>"; };
 		BEDBC3C81AE7949E0023CB84 /* DXNavigationSearchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXNavigationSearchModel.m; sourceTree = "<group>"; };
 		BEDBC3CA1AE797CF0023CB84 /* PNNavSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNNavSearchViewController.h; sourceTree = "<group>"; };
@@ -337,21 +346,6 @@
 				36718537A5E5F1A9E429A2F5 /* libPods.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		BE072A981AF605660094AD90 /* ShaperLayers */ = {
-			isa = PBXGroup;
-			children = (
-				BE072AA31AF607540094AD90 /* DXLineShaperLayer.h */,
-				BE072AA41AF607540094AD90 /* DXLineShaperLayer.m */,
-				BE072A9A1AF605A40094AD90 /* DXCheckMarkLayer.h */,
-				BE072A9B1AF605A40094AD90 /* DXCheckMarkLayer.m */,
-				BE072A9D1AF605B60094AD90 /* DXCrossLayer.h */,
-				BE072A9E1AF605B60094AD90 /* DXCrossLayer.m */,
-				BE072AA01AF605CC0094AD90 /* DXTriangleLayer.h */,
-				BE072AA11AF605CC0094AD90 /* DXTriangleLayer.m */,
-			);
-			name = ShaperLayers;
 			sourceTree = "<group>";
 		};
 		BE3A31EB1AE9444600C06D5E /* SearchModel */ = {
@@ -443,7 +437,8 @@
 		BE48C7CE1AC15AB000044490 /* Nimbus */ = {
 			isa = PBXGroup;
 			children = (
-				BE072A981AF605660094AD90 /* ShaperLayers */,
+				BED35F341AFF7EF500078F6F /* ContainerViewController */,
+				BED35F351AFF7EF500078F6F /* ShaperLayers */,
 				BE48C7CF1AC15AB000044490 /* Attributed Label */,
 				BE48C7D51AC15AB000044490 /* Badge */,
 				BE48C7D91AC15AB000044490 /* Collections */,
@@ -600,8 +595,6 @@
 		BE48C83F1AC15AB000044490 /* Paging Scroll View */ = {
 			isa = PBXGroup;
 			children = (
-				BEDBC3C11AE769C60023CB84 /* DXBanner.m */,
-				BEDBC3C21AE769C60023CB84 /* DXBanner.h */,
 				BE48C8401AC15AB000044490 /* NimbusPagingScrollView.h */,
 				BE48C8411AC15AB000044490 /* NIPagingScrollView+Subclassing.h */,
 				BE48C8421AC15AB000044490 /* NIPagingScrollView.h */,
@@ -613,6 +606,8 @@
 				BEE220F11AEDF0DC007F44F5 /* DXGridLayoutView.h */,
 				BEE220F21AEDF0DC007F44F5 /* DXGridLayoutView.m */,
 				BEE220F81AEE0111007F44F5 /* DXGridLayoutDefines.h */,
+				BED35F451AFF81E200078F6F /* DXPagingScrollView.h */,
+				BED35F461AFF81E200078F6F /* DXPagingScrollView.m */,
 			);
 			path = "Paging Scroll View";
 			sourceTree = "<group>";
@@ -685,6 +680,8 @@
 		BE9D51871AC19D1E004AF000 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				BE5FB1B01B53AD6B00CD3855 /* ALFLEXBOXUtils.h */,
+				BE5FB1B11B53AD6B00CD3855 /* ALFLEXBOXUtils.m */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -739,6 +736,8 @@
 		BE9D518F1AC2586F004AF000 /* PageScrollView */ = {
 			isa = PBXGroup;
 			children = (
+				BED35F481AFF8EA400078F6F /* Page1.h */,
+				BED35F491AFF8EA400078F6F /* Page1.m */,
 				BE9D51941AC258C3004AF000 /* PNPageViewController.h */,
 				BE9D51951AC258C3004AF000 /* PNPageViewController.m */,
 				BEDBC3AD1AE4E12A0023CB84 /* PNPageBannerViewController.h */,
@@ -754,6 +753,30 @@
 				BE9D51921AC258B1004AF000 /* PNCssLayoutViewController.m */,
 			);
 			name = "Css layout";
+			sourceTree = "<group>";
+		};
+		BED35F341AFF7EF500078F6F /* ContainerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				BED35F421AFF7F0F00078F6F /* DXPopupViewController.h */,
+				BED35F431AFF7F0F00078F6F /* DXPopupViewController.m */,
+			);
+			path = ContainerViewController;
+			sourceTree = "<group>";
+		};
+		BED35F351AFF7EF500078F6F /* ShaperLayers */ = {
+			isa = PBXGroup;
+			children = (
+				BED35F361AFF7EF500078F6F /* DXCheckMarkLayer.h */,
+				BED35F371AFF7EF500078F6F /* DXCheckMarkLayer.m */,
+				BED35F381AFF7EF500078F6F /* DXCrossLayer.h */,
+				BED35F391AFF7EF500078F6F /* DXCrossLayer.m */,
+				BED35F3A1AFF7EF500078F6F /* DXLineShaperLayer.h */,
+				BED35F3B1AFF7EF500078F6F /* DXLineShaperLayer.m */,
+				BED35F3C1AFF7EF500078F6F /* DXTriangleLayer.h */,
+				BED35F3D1AFF7EF500078F6F /* DXTriangleLayer.m */,
+			);
+			path = ShaperLayers;
 			sourceTree = "<group>";
 		};
 		BEDBC3F71AE8E9000023CB84 /* SearchHistoryObjects */ = {
@@ -923,33 +946,35 @@
 				BE48C84F1AC15AB000044490 /* NICollectionViewModel.m in Sources */,
 				BE48C8651AC15AB000044490 /* NILauncherButtonView.m in Sources */,
 				BE9D51A51AC259E4004AF000 /* PNFormTableViewController.m in Sources */,
+				BED35F401AFF7EF500078F6F /* DXLineShaperLayer.m in Sources */,
 				BE9D519C1AC258E4004AF000 /* PNAttributeLabelController.m in Sources */,
 				BE8A35B91AC3E20300C6F4A4 /* PNCustomCell.m in Sources */,
 				BE48C9351AC15E7C00044490 /* NIRadioGroupController.m in Sources */,
 				BE48C9301AC15E7C00044490 /* NICellCatalog.m in Sources */,
-				BE072A9F1AF605B60094AD90 /* DXCrossLayer.m in Sources */,
+				BED35F3F1AFF7EF500078F6F /* DXCrossLayer.m in Sources */,
 				BE48C9091AC15D4E00044490 /* NISDKAvailability.m in Sources */,
 				BE48C9041AC15D4E00044490 /* NINonEmptyCollectionTesting.m in Sources */,
 				BE8A35BC1AC3E25600C6F4A4 /* DXUtilViews.m in Sources */,
+				BED35F411AFF7EF500078F6F /* DXTriangleLayer.m in Sources */,
 				BE48C8FF1AC15D4E00044490 /* NIFoundationMethods.m in Sources */,
-				BE072AA51AF607540094AD90 /* DXLineShaperLayer.m in Sources */,
 				BE9D51A21AC259BE004AF000 /* PNPlusRowViewController.m in Sources */,
 				BEE220FB1AEE706F007F44F5 /* PNContainerViewController.m in Sources */,
 				BE48C9401AC15FC600044490 /* UIImage+AppleBlur.m in Sources */,
 				BE48C9311AC15E7C00044490 /* NICellFactory.m in Sources */,
 				BE1360871AE8F37D0099BA7A /* DXSearchHotTagsHeader.m in Sources */,
-				BEDBC3C31AE769C60023CB84 /* DXBanner.m in Sources */,
+				BED35F471AFF81E200078F6F /* DXPagingScrollView.m in Sources */,
+				BED35F441AFF7F0F00078F6F /* DXPopupViewController.m in Sources */,
 				BEDBC3FA1AE8E9470023CB84 /* DXSearchHistoryCellObject.m in Sources */,
 				BE48C8FC1AC15D4E00044490 /* NIDebuggingTools.m in Sources */,
 				BE48C8791AC15AB000044490 /* NIWebController.m in Sources */,
 				BE48C8FB1AC15D4E00044490 /* NIDataStructures.m in Sources */,
 				BE9D51961AC258C3004AF000 /* PNPageViewController.m in Sources */,
-				BE072A9C1AF605A40094AD90 /* DXCheckMarkLayer.m in Sources */,
+				BED35F3E1AFF7EF500078F6F /* DXCheckMarkLayer.m in Sources */,
 				BE48C9071AC15D4E00044490 /* NIPaths.m in Sources */,
 				BE48C9081AC15D4E00044490 /* NIRuntimeClassModifications.m in Sources */,
 				BE48C8F91AC15D4E00044490 /* NIButtonUtilities.m in Sources */,
+				BE5FB1B21B53AD6B00CD3855 /* ALFLEXBOXUtils.m in Sources */,
 				BE48C8781AC15AB000044490 /* NIPagingScrollViewPage.m in Sources */,
-				BE072AA21AF605CC0094AD90 /* DXTriangleLayer.m in Sources */,
 				BE48C93A1AC15EE000044490 /* NIImageProcessing.m in Sources */,
 				BE48C9321AC15E7C00044490 /* NIFormCellCatalog.m in Sources */,
 				BEEDB8161AF21D0600C58AA6 /* DXSearchHotTagObject.m in Sources */,
@@ -975,6 +1000,7 @@
 				BE48C9051AC15D4E00044490 /* NINonRetainingCollections.m in Sources */,
 				BE32019C1ADFA78300AD073F /* UICategory.m in Sources */,
 				BE48C84D1AC15AB000044490 /* NICollectionViewActions.m in Sources */,
+				BED35F4A1AFF8EA400078F6F /* Page1.m in Sources */,
 				BE8A35B51AC39CF300C6F4A4 /* PNRadioViewController.m in Sources */,
 				BE48C9021AC15D4E00044490 /* NINavigationAppearance.m in Sources */,
 				BE48C90A1AC15D4E00044490 /* NISnapshotRotation.m in Sources */,

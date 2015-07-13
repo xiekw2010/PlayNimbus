@@ -10,6 +10,7 @@
 #import "DXNavigationSearchModel.h"
 #import "NimbusCore.h"
 #import "DXSearchHotTagObject.h"
+#import "PNRadioViewController.h"
 
 @interface PNNavSearchViewController ()<DXSearchModelDelegate>
 {
@@ -27,7 +28,6 @@
 
     self.title = @"navSearch";
     _navSearchModel = [[DXNavigationSearchModel alloc] initWithTarget:self];
-    _navSearchModel.delegate = self;
     
     DXSearchHotTagAction action = ^(UIViewController *visibleViewController, DXSearchBarAndControllerModel *searchModel, id<DXHotTagObject>hotTagObject) {
         searchModel.searchBar.text = hotTagObject.title;
@@ -40,13 +40,21 @@
                                       [DXSearchHotTagObject objectWithTitle:@"ee" action:action],
                                       [DXSearchHotTagObject objectWithTitle:@"aa" action:action]
                                       ];
-    
-    
     self.navigationItem.titleView = _navSearchModel.navSearchBar;
     
-    UIView *vv = [[UIView alloc] initWithFrame:self.view.bounds];
-    vv.backgroundColor = [UIColor randomColor];
-    [self.view addSubview:vv];
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.backgroundColor = [UIColor randomColor];
+    btn.frame = CGRectMake(100, 100, 100, 100);
+    [self.view addSubview:btn];
+    [btn addTarget:self action:@selector(pushSomething) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"go" style:UIBarButtonItemStylePlain target:nil action:NULL];
+}
+
+- (void)pushSomething
+{
+    PNRadioViewController *vc = [PNRadioViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated

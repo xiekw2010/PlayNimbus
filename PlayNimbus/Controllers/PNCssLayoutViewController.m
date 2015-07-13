@@ -7,7 +7,11 @@
 //
 
 #import "PNCssLayoutViewController.h"
+#import "JUFLXNode.h"
 
-@implementation PNCssLayoutViewController
+@implementation PNCssLayoutViewController {
+    JUFLXNode *_node;
+}
+
 
 @end

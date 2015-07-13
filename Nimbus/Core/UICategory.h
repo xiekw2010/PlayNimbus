@@ -71,6 +71,7 @@ layer.position = CGPointMake(layer.position.x+(nowAnchorPoint.x-DX_lastAnchor.x)
 @interface NSArray (RandomIt)
 
 - (NSArray *)shortIt:(NSInteger)expectCount;
+- (NSArray *)shuffle;
 
 @end
 

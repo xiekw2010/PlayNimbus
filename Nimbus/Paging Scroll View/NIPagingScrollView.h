@@ -78,7 +78,6 @@ typedef enum {
 - (void)moveToNextAnimated:(BOOL)animated;
 - (void)moveToPreviousAnimated:(BOOL)animated;
 - (BOOL)moveToPageAtIndex:(NSInteger)pageIndex animated:(BOOL)animated updateVisiblePagesWhileScrolling:(BOOL)updateVisiblePagesWhileScrolling;
-
 // Short form for moveToPageAtIndex:pageIndex animated:animated updateVisiblePagesWhileScrolling:NO
 - (BOOL)moveToPageAtIndex:(NSInteger)pageIndex animated:(BOOL)animated;
 
@@ -90,6 +89,7 @@ typedef enum {
 
 // added by @xiekw2010
 - (UIScrollView *)scrollView;
+- (CGRect)frameForPageAtIndex:(NSInteger)pageIndex;
 
 @end
 

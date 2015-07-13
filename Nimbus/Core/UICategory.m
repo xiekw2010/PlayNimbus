@@ -226,6 +226,19 @@
     return [self subarrayWithRange:limitRange];
 }
 
+- (NSArray *)shuffle
+{
+    NSUInteger count = [self count];
+    NSMutableArray *resultArray = [self mutableCopy];
+    for (NSUInteger i = 0; i < count; ++i) {
+        // Select a random element between i and end of array to swap with.
+        NSUInteger nElements = count - i;
+        NSUInteger n = (arc4random() % nElements) + i;
+        [resultArray exchangeObjectAtIndex:i withObjectAtIndex:n];
+    }
+    return resultArray;
+}
+
 @end
 
 @implementation UIColor (Colorful)
